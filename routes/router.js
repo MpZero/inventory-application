@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const router = Router();
+const { getAllAlbums } = require("../controller/albumController");
 
 //homepage
 router.get("/", (req, res) => res.render("index.ejs"));
@@ -11,12 +12,12 @@ router.get("/about", (req, res) => res.render("about.ejs"));
 router.get("/contact", (req, res) => res.render("contact.ejs"));
 
 //// albums ////
-router.get("/albums", (req, res) => res.render("albums.ejs"));
+// router.get("/albums", (req, res) => res.render("albums.ejs"));
+router.get("/albums", getAllAlbums);
 
 router.get("/albums/new", (req, res) => res.render("albumpost.ejs"));
-router.get("/albums/:id", (req, res) => res.render("albumid.ejs"));
-
 router.post("/albums/new", (req, res) => res.render("albumpost.ejs"));
+router.get("/albums/:id", (req, res) => res.render("albumid.ejs"));
 
 //// artists ////
 router.get("/artists", (req, res) => res.render("artists.ejs"));

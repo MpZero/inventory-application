@@ -1,0 +1,6 @@
+.navbar {
+  background: blue;
+  display: grid;
+  gap: 1em;
+  padding: 2em;
+}

@@ -1,2 +1,4 @@
+.env
 sitemap.md
 node_modules
+populatedb.js

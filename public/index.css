@@ -1,0 +1,8 @@
+body {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+/* .index {
+  background-color: red;
+} */
