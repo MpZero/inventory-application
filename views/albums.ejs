@@ -10,8 +10,12 @@
 
     <h1>Albums</h1>
     <ul>
-      <% albums.map((album) => {%>
-      <li><%= album.albums%></li>
+      <% albums.map((album, index) => {%>
+      <li>
+        <a href="albums/<%= regExpFunction(album.albums)%>">
+          <%= album.albums%>
+        </a>
+      </li>
       <%})%>
     </ul>
     <a href="/albums/new">Post Album</a>

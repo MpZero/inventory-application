@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const router = Router();
 const { getAllAlbums } = require("../controller/albumController");
+const { getAllArtists } = require("../controller/artistController");
+const { getAllGenres } = require("../controller/genresController");
 
 //homepage
 router.get("/", (req, res) => res.render("index.ejs"));
@@ -20,15 +22,15 @@ router.post("/albums/new", (req, res) => res.render("albumpost.ejs"));
 router.get("/albums/:id", (req, res) => res.render("albumid.ejs"));
 
 //// artists ////
-router.get("/artists", (req, res) => res.render("artists.ejs"));
+router.get("/artists", getAllArtists);
 
 router.get("/artists/new", (req, res) => res.render("artistspost.ejs"));
-router.get("/artists/:id", (req, res) => res.render("artistid.ejs"));
+router.get("/artists/:id", (req, res) => res.render("artistsid.ejs"));
 
 router.post("/artists/new", (req, res) => res.render("artistpost.ejs"));
 
 //// genres ////
-router.get("/genres", (req, res) => res.render("genres.ejs"));
+router.get("/genres", getAllGenres);
 
 router.get("/genres/:id", (req, res) => res.render("genresid.ejs"));
 

@@ -3,14 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>document</title>
+    <title><%= title%></title>
   </head>
   <body>
     <%- include("./navbar"); %>
 
     <h1>Genres</h1>
-    <a href="/genres/0">Rock</a>
-    <a href="/genres/1">Metal</a>
-    <a href="/genres/2">Pop</a>
+
+    <ul>
+      <% genres.map((genre, index) => {%>
+      <li><a href="genres/<%= genre.genres%>"> <%= genre.genres%> </a></li>
+      <%})%>
+    </ul>
   </body>
 </html>

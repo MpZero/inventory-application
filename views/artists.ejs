@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title><%= title%></title>
   </head>
   <body>
     <%- include("./navbar"); %>
 
     <h1>Artists</h1>
+    <ul>
+      <% artists.map((artist) => {%>
+      <li>
+        <a href="artists/<%= regExpFunction(artist.artists)%>">
+          <%= artist.artists%>
+        </a>
+      </li>
+      <%})%>
+    </ul>
     <a href="/artists/new">Post Artist</a>
   </body>
 </html>
