@@ -3,17 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="pixels.css" />
   </head>
-  <div class="navbar">
-    <nav>
+
+  <nav class="navbar">
+    <div class="navbar-h1">
       <h1>GG Music Database</h1>
-      <a href="/">Home</a>
-      <a href="/artists">Artists</a>
-      <a href="/albums">Albums</a>
-      <a href="/genres">Genres</a>
-      <a href="/about">About`</a>
-      <a href="/contact">Contact</a>
-    </nav>
-  </div>
+    </div>
+    <div class="navbar-info-wrapper">
+      <p>Today's pick:</p>
+      <div class="info-wrapper-content">
+        <img
+          class="info-img"
+          src="https://placehold.co/10x10"
+          alt=""
+          srcset=""
+        />
+        <div class="info-box">
+          <p>Kill 'Em All</p>
+          <p>Metallica</p>
+          <div class="rating-wrapper">
+            <p>Rating:</p>
+            <p>9/10</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="amount-wrapper">
+      <p>Albums</p>
+      <div class="amount-number-wrapper"><p>1234</p></div>
+    </div>
+    <div class="links-wrapper">
+      <a class="link1" href="/"><p>Home</p></a>
+      <a class="link2 links" href="/contact">Contact</a>
+      <a class="link3 links" href="/artists"><p>Artists</p></a>
+      <a class="link4 links" href="/albums"><p>Albums</p></a>
+      <a class="link5 links" href="/genres"><p>Genres</p></a>
+      <a class="link6 links" href="/about"><p>About</p> </a>
+      <div class="link7 links"></div>
+    </div>
+  </nav>
 </html>

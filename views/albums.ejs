@@ -3,21 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="layout.css" />
+
     <title><%= title%></title>
   </head>
   <body>
     <%- include("./navbar"); %>
-
-    <h1>Albums</h1>
-    <ul>
-      <% albums.map((album, index) => {%>
-      <li>
-        <a href="albums/<%= regExpFunction(album.albums)%>">
-          <%= album.albums%>
-        </a>
-      </li>
-      <%})%>
-    </ul>
-    <a href="/albums/new">Post Album</a>
+    <main>
+      <h1>All Albums</h1>
+      <ul>
+        <% albums.map((album, index) => {%>
+        <li>
+          <a href="albums/<%= regExpFunction(album.albums)%>">
+            <%= album.albums%>
+          </a>
+        </li>
+        <%})%>
+      </ul>
+      <a href="/albums/new">Post Album</a>
+    </main>
   </body>
 </html>
