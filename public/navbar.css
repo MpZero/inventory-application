@@ -1,6 +1,9 @@
 @font-face {
   font-family: "m6x11";
   src: url("./fonts/m6x11.ttf") format("truetype");
+  font-family: "Roboto";
+  src: url("https://fonts.googleapis.com/css2?family=Kanit&family=Oswald:wght@200..700&family=Poppins&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik&display=swap")
+    format("truetype");
 }
 :root {
   --radius: 8px;
@@ -11,7 +14,7 @@
   flex-direction: column;
   padding: 0.3rem;
   background: #3a2326;
-  border: 3px solid #a81112;
+  border-inline: 3px solid #a81112;
   gap: 0.3rem;
   /* border-bottom: 2px solid #444; */
 }
@@ -169,9 +172,6 @@
 }
 
 @media (min-width: 1024px) {
-  .navbar {
-    transform: translateX(40px);
-  }
   .navbar-h1 {
     margin-bottom: 0;
   }

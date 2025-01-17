@@ -5,10 +5,14 @@ const { getAllArtists } = require("../controller/artistController");
 const { getAllGenres } = require("../controller/genresController");
 
 //homepage
-router.get("/", (req, res) => res.render("index.ejs"));
+router.get("/", (req, res) =>
+  res.render("index.ejs", { title: "GG Music Database" })
+);
 
 //about
-router.get("/about", (req, res) => res.render("about.ejs"));
+router.get("/about", (req, res) =>
+  res.render("about.ejs", { title: "About | GG Music Database" })
+);
 
 //contact
 router.get("/contact", (req, res) => res.render("contact.ejs"));
