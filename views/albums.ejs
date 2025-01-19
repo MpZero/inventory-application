@@ -29,22 +29,10 @@
           />
           <p><%= all.albums %></p>
           <p><%= all.artists %></p>
-          <p>Release: <%= all.date.toLocaleDateString() %></p>
+          <p>Release: <%= new Date(all.date).toLocaleDateString()%></p>
         </div>
         <% }); %>
-        <!-- <% rows.forEach(row => { %>
-        <div class="album-wrapper">
-          <img
-            class="album-img"
-            src="https://placehold.co/150x150"
-            alt=""
-            srcset=""
-          />
-          <p><%= row.album %></p>
-          <p><%= row.artist %></p>
-          <p>Release: <%= row.date.toLocaleDateString() %></p>
-        </div>
-        <% }); %> -->
+
         <a class="post-album-btn" href="/albums/new">Post Album</a>
       </main>
       <%- include("./footer"); %>

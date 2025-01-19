@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit&family=Oswald:wght@200..700&family=Poppins&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik&display=swap");
 
 .albums-main {
+  color: white;
   padding: 0.4rem;
   text-align: left;
   display: grid;
@@ -87,13 +88,31 @@
   .albums-main {
     text-align: left;
     display: grid;
-    grid-template-columns: repeat(6, auto);
+    grid-template-columns: repeat(5, auto);
     gap: 0.8rem;
     padding: 1rem;
   }
 
   .album-wrapper {
     font-size: 0.6rem;
+  }
+
+  .albums-h1 {
+    grid-column: 1/6;
+  }
+
+  .post-album-btn {
+    grid-column: 1/6;
+  }
+}
+
+@media (min-width: 1400px) {
+  .albums-main {
+    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    gap: 0.8rem;
+    padding: 1rem;
   }
 
   .albums-h1 {

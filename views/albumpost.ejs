@@ -3,14 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css" />
-
-    <title>Document</title>
+    <base href="/" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="footer.css" />
+    <!-- <link rel="stylesheet" href="index.css" /> -->
   </head>
   <body>
-    <%- include("./navbar"); %>
-
-    <h1>Albums POST</h1>
-    <a href="/albums">Go back</a>
+    <%- include("./navbar"); %> <%- include("./header"); %>
+    <div class="album">
+      <h1>Add new Album</h1>
+      <a href="/albums">Go back</a>
+      <%- include("./form"); %> <%- include("./footer"); %>
+    </div>
   </body>
 </html>

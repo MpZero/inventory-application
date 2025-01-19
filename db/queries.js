@@ -2,10 +2,18 @@ const pool = require("./pool");
 
 async function getAll(sort, direction) {
   try {
-    const { rows } = await pool.query(
-      `SELECT * FROM music ORDER BY ${sort} ${direction}`
-    );
-    return rows;
+    if (!sort && !direction) {
+      const { rows } = await pool.query(`SELECT * FROM music`);
+      return rows;
+    } else if (sort && !direction) {
+      const { rows } = await pool.query(`SELECT * FROM music ORDER BY ${sort}`);
+      return rows;
+    } else {
+      const { rows } = await pool.query(
+        `SELECT * FROM music ORDER BY ${sort} ${direction}`
+      );
+      return rows;
+    }
   } catch (error) {
     console.error("Error getting all:", error);
     throw new Error("Failed to retrieve all");
@@ -54,4 +62,18 @@ async function getGenres() {
   }
 }
 
-module.exports = { getAll, getAlbums, getArtists, getGenres, getDate };
+async function insertAlbum(artist, album, genre, trueDate) {
+  await pool.query(
+    "INSERT INTO music(artists, albums, genres, date) VALUES ($1, $2, $3, $4)",
+    [artist, album, genre, trueDate]
+  );
+}
+
+module.exports = {
+  getAll,
+  getAlbums,
+  getArtists,
+  getGenres,
+  getDate,
+  insertAlbum,
+};

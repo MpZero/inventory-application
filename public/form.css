@@ -1,0 +1,16 @@
+body {
+  color: white;
+}
+
+.form-wrapper {
+  color: white;
+}
+.form {
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: white;
+}
