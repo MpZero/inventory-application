@@ -1,29 +1,28 @@
 const db = require("../db/queries");
-const { regExpFunction } = require("./regExp");
+// const { regExpFunction } = require("./regExp");
 async function getAllAlbums(req, res) {
   try {
-    const albums = await db.getAlbums();
-    const dates = await db.getDate();
-    const artists = await db.getArtists();
+    // const albums = await db.getAlbums();
+    // const dates = await db.getDate();
+    // const artists = await db.getArtists();
     const all = await db.getAll(req.query.sort, req.query.direction);
     // console.log(req.query.sort);
-    console.log("All: ", all);
+    // console.log("All: ", all);
 
-    const data = { albums, dates, artists };
-    const rows = data.albums.map((_, index) => ({
-      album: data.albums[index].albums,
-      date: data.dates[index].date,
-      artist: data.artists[index].artists,
-    }));
+    // const data = { albums, dates, artists };
+    // const rows = data.albums.map((_, index) => ({
+    //   album: data.albums[index].albums,
+    //   date: data.dates[index].date,
+    //   artist: data.artists[index].artists,
+    // }));
 
-    console.log("Albums: ", albums);
-    // console.log("Date: ", date);
+    // console.log("Albums: ", albums);
     res.render("albums", {
       title: "Albums",
-      albums,
+      // albums,
       all,
-      rows,
-      regExpFunction,
+      // rows,
+      // regExpFunction,
     });
   } catch (error) {
     console.error("Error fetching albums: ", error);
@@ -36,10 +35,6 @@ function createAlbumGet(req, res) {
 async function createAlbumPost(req, res) {
   console.log(res.body);
   const { artist, album, genre, date } = req.body;
-  // const trueDate = date.toLocaleDateString();
-  new Date(date).toLocaleDateString();
-  console.log(date);
-  // console.log(trueDate);
 
   try {
     // const artist = res.body.artist;

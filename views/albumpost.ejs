@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" conte nt="width=device-width, initial-scale=1.0" />
     <base href="/" />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="layout.css" />
@@ -12,11 +12,14 @@
     <!-- <link rel="stylesheet" href="index.css" /> -->
   </head>
   <body>
-    <%- include("./navbar"); %> <%- include("./header"); %>
-    <div class="album">
-      <h1>Add new Album</h1>
-      <a href="/albums">Go back</a>
-      <%- include("./form"); %> <%- include("./footer"); %>
+    <%- include("./navbar"); %>
+    <div>
+      <%- include("./header"); %>
+      <main class="main-wrapper">
+        <h1>Add new Album</h1>
+        <%- include("./form"); %>
+      </main>
+      <%- include("./footer"); %>
     </div>
   </body>
 </html>

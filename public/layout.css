@@ -7,6 +7,10 @@
   /* color: #ffffff; */
 }
 
+body {
+  background-color: #292929;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -38,7 +42,6 @@ main {
   body {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    background-color: black;
   }
   header {
     padding-left: 2.5rem;
