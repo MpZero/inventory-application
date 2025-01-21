@@ -1,6 +1,9 @@
 .about-wrapper {
   padding: 2rem;
   color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .about-wrapper p {

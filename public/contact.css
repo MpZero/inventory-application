@@ -1,6 +1,9 @@
 .contact-wrapper {
   padding: 2rem;
   color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .contact-wrapper p {

@@ -42,7 +42,7 @@ async function getAlbums() {
 
 async function getArtists() {
   try {
-    const { rows } = await pool.query("SELECT artists FROM music");
+    const { rows } = await pool.query("SELECT  DISTINCT artists FROM music");
     return rows;
   } catch (error) {
     console.error("Error getting all artists:", error);

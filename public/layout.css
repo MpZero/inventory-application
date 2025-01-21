@@ -11,13 +11,13 @@ body {
   background-color: #292929;
 }
 
-main {
+/* main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
   background-color: #292929;
-}
+} */
 
 /* @media (min-width: 768px) {
   body {
