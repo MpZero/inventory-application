@@ -17,18 +17,22 @@
       <%- include("./header"); %>
       <main class="artists-main-wrapper">
         <h1>Artists</h1>
+
         <ol>
           <% artists.map((artist) => {%>
           <li>
-            <a href="artists/<%= regExpFunction(artist.artists)%>">
+            <a
+              class="artists-link"
+              href="artists/<%= regExpFunction(artist.artists)%>"
+            >
               <p><%= artist.artists%></p>
             </a>
           </li>
           <%})%>
         </ol>
-        <a href="/artists/new">Post Artist</a>
-        <%- include("./footer"); %>
+        <a class="artists-post-btn" href="/artists/new">Add new Artist</a>
       </main>
+      <%- include("./footer"); %>
     </div>
   </body>
 </html>

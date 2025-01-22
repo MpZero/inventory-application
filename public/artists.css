@@ -1,11 +1,15 @@
 .artists-main-wrapper {
   color: white;
   padding: 0.4rem;
+  display: grid;
+  /* align-items: center; */
+  /* gap: 1rem; */
 }
 
 ol {
+  grid-column: 1/3;
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
   padding-left: 0;
   margin-bottom: 1rem;
@@ -35,9 +39,11 @@ li a {
   border-radius: 8px;
 }
 
-li:hover {
+li:hover,
+.artists-post-btn:hover {
   transform: translateY(-4px);
 }
+
 li:hover,
 li a:hover {
   color: #a81112;
@@ -50,12 +56,40 @@ li a:active {
   text-decoration: none;
 }
 
-@media (min-width: 1024px) {
+.artists-post-btn {
+  text-align: center;
+  /* font-size: 0.8rem; */
+  padding: 0.5rem;
+  grid-column: 1/3;
+  text-decoration: none;
+  min-width: 100%;
+  color: white;
+  background-color: #f99400;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+}
+
+@media (min-width: 599px) {
   ol {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 0.5rem;
-    padding-left: 0;
-    margin-bottom: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 700px) {
+  ol {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .artists-main-wrapper {
+    padding: 1rem;
+  }
+  .artists-link {
+    font-size: 1rem;
+  }
+  .artists-post-btn {
+    font-size: 1.2rem;
   }
 }
