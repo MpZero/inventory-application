@@ -31,6 +31,21 @@
 
 .post-album-btn {
   grid-column: 1/4;
+
+  text-align: center;
+  /* font-size: 0.8rem; */
+  padding: 0.5rem;
+  text-decoration: none;
+  min-width: 100%;
+  color: white;
+  background-color: #f99400;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+}
+
+.post-album-btn:hover {
+  transform: translateY(-4px);
 }
 
 .album-wrapper img {
