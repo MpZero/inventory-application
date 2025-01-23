@@ -4,13 +4,22 @@ footer {
   background-color: #1f1f1f;
   color: white;
   border-top: 2px solid #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.name {
+  color: #f04;
 }
 
 footer a {
-  text-decoration: none;
+  text-decoration: underline;
   color: #f04;
 }
 
 footer a:hover {
+  color: gold;
   text-decoration: underline;
 }

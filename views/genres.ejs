@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="layout.css" />
     <link rel="stylesheet" href="header.css" />
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="genres.css" />
     <link rel="stylesheet" href="footer.css" />
 
     <title><%= title%></title>
@@ -14,12 +14,17 @@
   <body>
     <%- include("./navbar"); %>
 
-    <h1>Genres</h1>
-
-    <ul>
-      <% genres.map((genre, index) => {%>
-      <li><a href="genres/<%= genre.genres%>"> <%= genre.genres%> </a></li>
-      <%})%>
-    </ul>
+    <div>
+      <%- include("./header"); %>
+      <div class="genres-main-wrapper">
+        <h1 class="genres-h1">Genres</h1>
+        <ol>
+          <% genres.map((genre) => {%>
+          <li><a href="genres/<%= genre.genres%>"> <%= genre.genres%> </a></li>
+          <%})%>
+        </ol>
+      </div>
+      <%- include("./footer"); %>
+    </div>
   </body>
 </html>
