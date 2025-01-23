@@ -21,15 +21,17 @@
         <h1 class="albums-h1">All Albums</h1>
         <% all.map(all => { %>
         <div class="album-wrapper">
-          <img
-            class="album-img"
-            src="https://placehold.co/150x150"
-            alt=""
-            srcset=""
-          />
-          <p><%= all.albums %></p>
-          <p><%= all.artists %></p>
-          <p>Release: <%= new Date(all.date).toLocaleDateString()%></p>
+          <a class="albums-link" href="albums/<%= all.id%>">
+            <img
+              class="album-img"
+              src="https://placehold.co/150x150"
+              alt=""
+              srcset=""
+            />
+            <p><%= all.albums %></p>
+            <p><%= all.artists %></p>
+            <p>Release: <%= new Date(all.date).toLocaleDateString()%></p>
+          </a>
         </div>
         <% }); %>
 

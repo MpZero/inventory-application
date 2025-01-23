@@ -29,6 +29,16 @@ async function getAllAlbums(req, res) {
     res.status(500).send("Error fetching albums");
   }
 }
+
+async function getAlbum(req, res) {
+  const album = await db.getAlbum(req.params.id);
+  console.log("controller", album);
+
+  res.render("albumid", {
+    title: "Album",
+    album: album,
+  });
+}
 function createAlbumGet(req, res) {
   res.render("albumpost", { title: "Create Album" });
 }
@@ -60,4 +70,4 @@ async function createAlbumPost(req, res) {
   }
 }
 
-module.exports = { getAllAlbums, createAlbumGet, createAlbumPost };
+module.exports = { getAllAlbums, getAlbum, createAlbumGet, createAlbumPost };

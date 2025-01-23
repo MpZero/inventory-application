@@ -40,6 +40,20 @@ async function getAlbums() {
   }
 }
 
+async function getAlbum(id) {
+  try {
+    const { rows } = await pool.query(
+      `SELECT artists, albums, genres, date FROM music WHERE id = ${id}`
+    );
+    console.log(`query: `, rows);
+
+    return rows;
+  } catch (error) {
+    console.error("Error getting album:", error);
+    throw new Error("Failed to retrieve album");
+  }
+}
+
 async function getArtists() {
   try {
     const { rows } = await pool.query("SELECT  DISTINCT artists FROM music");
@@ -72,6 +86,7 @@ async function insertAlbum(artist, album, genre, trueDate) {
 module.exports = {
   getAll,
   getAlbums,
+  getAlbum,
   getArtists,
   getGenres,
   getDate,

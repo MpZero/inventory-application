@@ -9,24 +9,26 @@
   grid-template-columns: repeat(3, auto);
   gap: 0.6rem;
 }
+.albums-h1 {
+  grid-column: 1/4;
+}
 
+.albums-link {
+  text-decoration: none;
+  padding: 0.2rem;
+}
 .album-wrapper {
   background-color: white;
-  padding: 1rem;
+  /* padding: 1rem; */
   font-size: 0.4rem;
   max-width: 150px;
   max-height: 300px;
-  padding: 0.2rem;
   border-radius: 8px;
   transition: all 0.1s ease-in-out;
   text-align: center;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-.albums-h1 {
-  grid-column: 1/4;
 }
 
 .post-album-btn {
