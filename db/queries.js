@@ -40,13 +40,16 @@ async function getAlbums() {
   }
 }
 
-async function getAlbum(id) {
+async function getAlbum(album) {
+  // console.log(`Querying for album: ${album}`);
   try {
-    const { rows } = await pool.query(
-      `SELECT artists, albums, genres, date FROM music WHERE id = ${id}`
-    );
-    console.log(`query: `, rows);
-
+    const query = `
+      SELECT id, artists, albums, genres, date 
+      FROM music 
+      WHERE LOWER(REPLACE(albums, ' ', '')) = $1;
+    `;
+    const { rows } = await pool.query(query, [album]);
+    console.log(`Query result:`, rows);
     return rows;
   } catch (error) {
     console.error("Error getting album:", error);

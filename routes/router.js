@@ -28,9 +28,7 @@ router.get("/albums", getAllAlbums);
 
 router.get("/albums/new", createAlbumGet);
 router.post("/new", createAlbumPost);
-// router.get("/albums/:id", (req, res) => res.render("albumid.ejs") // og
-
-router.get("/albums/:id", getAlbum);
+router.get("/albums/:album", getAlbum);
 
 //// artists ////
 router.get("/artists", getAllArtists);

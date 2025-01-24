@@ -1,5 +1,5 @@
 const db = require("../db/queries");
-// const { regExpFunction } = require("./regExp");
+const { regExpFunction } = require("./regExp");
 async function getAllAlbums(req, res) {
   try {
     // const albums = await db.getAlbums();
@@ -19,10 +19,8 @@ async function getAllAlbums(req, res) {
     // console.log("Albums: ", albums);
     res.render("albums", {
       title: "Albums",
-      // albums,
       all,
-      // rows,
-      // regExpFunction,
+      regExpFunction,
     });
   } catch (error) {
     console.error("Error fetching albums: ", error);
@@ -31,14 +29,30 @@ async function getAllAlbums(req, res) {
 }
 
 async function getAlbum(req, res) {
-  const album = await db.getAlbum(req.params.id);
-  console.log("controller", album);
+  console.log("Route parameters:", req.params);
 
-  res.render("albumid", {
-    title: "Album",
-    album: album,
-  });
+  const album = req.params.album;
+  console.log("Album from route:", album);
+
+  try {
+    const albumData = await db.getAlbum(album);
+    console.log("Query result:", albumData);
+
+    if (albumData.length === 0) {
+      return res.status(404).send("Album not found");
+    }
+
+    res.render("albumid", {
+      title: albumData[0].albums,
+      album: albumData,
+      regExpFunction,
+    });
+  } catch (error) {
+    console.error("Error fetching album:", error);
+    res.status(500).send("Error fetching album");
+  }
 }
+
 function createAlbumGet(req, res) {
   res.render("albumpost", { title: "Create Album" });
 }

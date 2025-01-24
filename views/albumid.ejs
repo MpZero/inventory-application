@@ -7,31 +7,43 @@
 
     <link rel="stylesheet" href="layout.css" />
     <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="header.css" />
     <link rel="stylesheet" href="footer.css" />
     <link rel="stylesheet" href="albumid.css" />
 
-    <title>Document</title>
+    <title><%= title%></title>
   </head>
   <body>
     <%- include("./navbar"); %>
     <div>
+      <%- include("./header"); %>
       <main>
-        <h1>Albums ID</h1>
-
         <% album.map(album => { %>
-        <div class="album-wrapper">
+        <h1 class="album-h1"><%= album.albums %></h1>
+        <div class="album-img-wrapper">
           <img
             class="album-img"
             src="https://placehold.co/150x150"
             alt=""
             srcset=""
           />
-          <p><%= album.albums %></p>
-          <p><%= album.artists %></p>
-          <p>Release: <%= new Date(album.date).toLocaleDateString()%></p>
         </div>
-        <% })%> <%- include("./footer"); %>
+        <div class="album-info-wrapper">
+          <p>Artist</p>
+
+          <a href="artists/<%= regExpFunction(album.artists)%>">
+            <p><%= album.artists %></p>
+          </a>
+          <p>Release</p>
+          <p><%= new Date(album.date).toLocaleDateString()%></p>
+
+          <p>Genre</p>
+          <p><%= album.genres %></p>
+
+          <% })%>
+        </div>
       </main>
+      <%- include("./footer"); %>
     </div>
   </body>
 </html>

@@ -1,3 +1,6 @@
+main {
+  color: white;
+}
 .album-wrapper {
   background-color: white;
   /* padding: 1rem; */
@@ -10,4 +13,27 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.album-h1 {
+  border-bottom: 1px solid #666;
+  margin: 1rem;
+}
+.album-img-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-block: 0.8rem;
+}
+.album-img {
+  width: 100%;
+  max-width: 800px;
+}
+
+.album-info-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  padding-inline: 1rem;
+  margin-bottom: 0.5rem;
 }
