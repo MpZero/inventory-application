@@ -31,16 +31,41 @@
         <div class="album-info-wrapper">
           <p>Artist</p>
 
-          <a href="artists/<%= regExpFunction(album.artists)%>">
+          <a
+            href="artists/<%= regExpFunction(album.artists)%>"
+            class="artists-link"
+          >
             <p><%= album.artists %></p>
           </a>
           <p>Release</p>
           <p><%= new Date(album.date).toLocaleDateString()%></p>
 
           <p>Genre</p>
-          <p><%= album.genres %></p>
+          <a
+            href="genres/<%= regExpFunction(album.genres)%>"
+            class="genres-link"
+          >
+            <p><%= album.genres %></p>
+          </a>
+          <p>Score</p>
+          <p class="p-score">9/10</p>
+
+          <p>Ranking</p>
+          <p class="p-ranking">#1</p>
 
           <% })%>
+        </div>
+        <div class="desc-wrapper">
+          <p>Description:</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore
+            aliquid optio quaerat accusantium voluptatibus ut explicabo at ex!
+            Cumque nam sed dicta doloremque voluptatibus! Similique libero
+            dolores ratione aliquam cumque!
+          </p>
+        </div>
+        <div class="back-link-wrapper">
+          <a class="back-link" href="/albums">Take me back</a>
         </div>
       </main>
       <%- include("./footer"); %>
