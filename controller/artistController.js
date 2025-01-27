@@ -11,4 +11,32 @@ async function getAllArtists(req, res) {
   }
 }
 
-module.exports = { getAllArtists };
+async function getArtist(req, res) {
+  console.log("Route parameters:", req.params);
+
+  const artist = req.params.artist;
+  console.log("artist from route:", artist);
+
+  try {
+    const artistData = await db.getArtist(artist);
+    console.log("Query result:", artistData);
+
+    if (artistData.length === 0) {
+      return res.status(404).send("artist not found");
+    }
+
+    console.log(`artis data bro`, artistData);
+
+    res.render("artistsid", {
+      title: artistData[0].artists,
+      artist: artistData,
+      name: artistData[0].artists,
+      regExpFunction,
+    });
+  } catch (error) {
+    console.error("Error fetching artist:", error);
+    res.status(500).send("Error fetching artist");
+  }
+}
+
+module.exports = { getAllArtists, getArtist };

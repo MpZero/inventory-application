@@ -3,13 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css" />
+    <base href="/" />
 
-    <title>Document</title>
+    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="footer.css" />
+    <link rel="stylesheet" href="artistid.css" />
+
+    <title><%= title%></title>
   </head>
   <body>
     <%- include("./navbar"); %>
+    <div>
+      <%- include("./header"); %>
+      <main>
+        <h1 class="artist-h1"><%= name %></h1>
+        <div class="artist-img-wrapper">
+          <img
+            class="artist-img-main"
+            src="https://placehold.co/150x150"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <div class="artist-info-wrapper">
+          <p>Released Albums</p>
+          <p>num of albums</p>
 
-    <h1>Artists ID</h1>
+          <p>Score</p>
+          <p class="p-score">9/10</p>
+
+          <p>Ranking</p>
+          <p class="p-ranking">#1</p>
+          <div class="desc-wrapper">
+            <p>Description:</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Inventore aliquid optio quaerat accusantium voluptatibus ut
+              explicabo at ex! Cumque nam sed dicta doloremque voluptatibus!
+              Similique libero dolores ratione aliquam cumque!
+            </p>
+          </div>
+        </div>
+        <div class="albums-wrapper">
+          <% artist.map(artist => { %>
+          <div class="artist-wrapper">
+            <a
+              class="artist-link"
+              href="albums/<%= regExpFunction(artist.albums) %>"
+            >
+              <img
+                class="artist-img"
+                src="https://placehold.co/150x150"
+                alt=""
+                srcset=""
+              />
+              <div class="album-info-wrapper">
+                <p><%= artist.albums %></p>
+                <p>Release: <%= new Date(artist.date).toLocaleDateString()%></p>
+              </div>
+            </a>
+          </div>
+          <% }); %>
+        </div>
+        <div class="back-link-wrapper">
+          <a class="back-link" href="/albums">Take me back</a>
+        </div>
+      </main>
+      <%- include("./footer"); %>
+    </div>
   </body>
 </html>

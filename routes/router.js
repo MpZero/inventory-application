@@ -6,7 +6,7 @@ const {
   createAlbumPost,
   createAlbumGet,
 } = require("../controller/albumController");
-const { getAllArtists } = require("../controller/artistController");
+const { getAllArtists, getArtist } = require("../controller/artistController");
 const { getAllGenres } = require("../controller/genresController");
 
 //homepage
@@ -34,7 +34,7 @@ router.get("/albums/:album", getAlbum);
 router.get("/artists", getAllArtists);
 
 router.get("/artists/new", (req, res) => res.render("artistspost.ejs"));
-router.get("/artists/:id", (req, res) => res.render("artistsid.ejs"));
+router.get("/artists/:artist", getArtist);
 
 router.post("/artists/new", (req, res) => res.render("artistpost.ejs"));
 

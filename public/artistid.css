@@ -1,0 +1,141 @@
+main {
+  color: white;
+}
+
+.artist-h1 {
+  border-bottom: 1px solid #666;
+  margin: 1rem;
+}
+.artist-img-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-block: 0.8rem;
+}
+
+.artist-img-main,
+.artist-img {
+  width: 100%;
+  max-width: 600px;
+}
+
+.artist-info-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding-inline: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.p-score {
+  color: gold;
+}
+
+.desc-wrapper {
+  border-top: 1px solid #666;
+  /* margin-inline: 1rem; */
+  padding-block: 1rem;
+  grid-column: 1/3;
+}
+/*  */
+.albums-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 0.4rem;
+}
+
+.artist-wrapper {
+  background-color: white;
+  padding: 0.2rem;
+  font-size: 0.4rem;
+  /* max-width: 150px; */
+  /* max-height: 300px; */
+  border-radius: 8px;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.artist-link {
+  text-decoration: none;
+}
+
+.artist-link p:nth-child(1) {
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.artist-link:hover p:nth-child(1) {
+  color: #c5b13d;
+  color: rgb(49, 156, 202);
+  color: rgb(42, 160, 210);
+  text-decoration: underline;
+}
+.artists-link:hover,
+.genres-link:hover,
+.back-link:hover {
+  color: #83fafa;
+  text-decoration: underline;
+}
+
+.artist-img {
+  border-radius: 8px;
+}
+
+/*  */
+
+.album-info-wrapper {
+  padding: 0.5rem;
+  font-size: 0.6rem;
+  font-family: "Poppins", "Roboto", "Rubik";
+  text-decoration: none;
+}
+
+.artist-link p {
+  font-family: sans-serif;
+  padding-left: 0.2rem;
+  color: black;
+  text-align: start;
+  margin: 2px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.back-link-wrapper {
+  margin: 1rem;
+}
+
+.back-link {
+  color: #83c4fa;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+@media (min-width: 550px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .artist-h1 {
+    grid-column: 1/3;
+  }
+
+  .artist-img-wrapper {
+    margin-left: 1rem;
+    padding: 1rem;
+    border: 1px solid #404040;
+    margin-top: 0;
+  }
+
+  .artist-info-wrapper {
+    max-width: 360px;
+    padding: 1rem;
+    align-content: space-around;
+  }
+
+  .artist-info-wrapper p {
+    border-bottom: 1px solid #404040;
+  }
+}

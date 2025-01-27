@@ -67,6 +67,23 @@ async function getArtists() {
   }
 }
 
+async function getArtist(artist) {
+  console.log(`Querying for artist: ${artist}`);
+  try {
+    const query = `
+      SELECT id, artists, albums,  date 
+      FROM music 
+      WHERE LOWER(REPLACE(artists, ' ', '')) = $1;
+    `;
+    const { rows } = await pool.query(query, [artist]);
+    console.log(`Query result:`, rows);
+    return rows;
+  } catch (error) {
+    console.error("Error getting artist:", error);
+    throw new Error("Failed to retrieve artist");
+  }
+}
+
 async function getGenres() {
   try {
     const { rows } = await pool.query(
@@ -91,6 +108,7 @@ module.exports = {
   getAlbums,
   getAlbum,
   getArtists,
+  getArtist,
   getGenres,
   getDate,
   insertAlbum,
