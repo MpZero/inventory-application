@@ -73,7 +73,7 @@ async function getArtist(artist) {
     const query = `
       SELECT id, artists, albums,  date 
       FROM music 
-      WHERE LOWER(REPLACE(artists, ' ', '')) = $1;
+      WHERE LOWER(REPLACE(artists, ' ', '')) = $1 ORDER BY date ASC;
     `;
     const { rows } = await pool.query(query, [artist]);
     console.log(`Query result:`, rows);
