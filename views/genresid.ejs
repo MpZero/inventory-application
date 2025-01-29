@@ -3,18 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <base href="/" />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="layout.css" />
     <link rel="stylesheet" href="header.css" />
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="footer.css" />
+    <link rel="stylesheet" href="genresid.css" />
 
     <title>genresID</title>
   </head>
   <body>
     <%- include("./navbar"); %>
 
-    <h1>genresID</h1>
+    <div class="genresid-div-wrapper">
+      <%- include("./header"); %>
+      <main>
+        <h1><%= name%></h1>
+
+        <div class="desc-wrapper">
+          <p>Description:</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore
+            aliquid optio quaerat accusantium voluptatibus ut explicabo at ex!
+            Cumque nam sed dicta doloremque voluptatibus! Similique libero
+            dolores ratione aliquam cumque!
+          </p>
+        </div>
+        <div class="albums-wrapper">
+          <% genre.map(genre => { %>
+          <div class="genres-wrapper">
+            <a
+              class="genres-link"
+              href="albums/<%= regExpFunction(genre.albums) %>"
+            >
+              <img
+                class="genres-img"
+                src="https://placehold.co/150x150"
+                alt=""
+                srcset=""
+              />
+              <div class="album-info-wrapper">
+                <p><%= genre.albums %></p>
+                <p>Release: <%= new Date(genre.date).toLocaleDateString()%></p>
+              </div>
+            </a>
+          </div>
+          <% }); %>
+        </div>
+        <div class="back-link-wrapper">
+          <a class="back-link" href="/genres">Take me back</a>
+        </div>
+      </main>
+      <%- include("./footer"); %>
+    </div>
   </body>
 </html>

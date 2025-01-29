@@ -19,4 +19,32 @@ async function getAllGenres(req, res) {
   }
 }
 
-module.exports = { getAllGenres };
+async function getGenre(req, res) {
+  console.log("Route parameters:", req.params);
+
+  const genre = req.params.id;
+  console.log("genre from route:", genre);
+
+  try {
+    const genreData = await db.getGenre(genre);
+    console.log("Query result:", genreData);
+
+    if (genreData.length === 0) {
+      return res.status(404).send("genre not found");
+    }
+
+    console.log(`genres data bro`, genreData);
+
+    res.render("genresid", {
+      title: genreData[0].genre,
+      genre: genreData,
+      name: genreData[0].genre,
+      regExpFunction,
+    });
+  } catch (error) {
+    console.error("Error fetching genre:", error);
+    res.status(500).send("Error fetching genre");
+  }
+}
+
+module.exports = { getAllGenres, getGenre };

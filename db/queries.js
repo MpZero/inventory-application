@@ -96,6 +96,23 @@ async function getGenres() {
   }
 }
 
+async function getGenre(genre) {
+  console.log(`Querying for genre: ${genre}`);
+  try {
+    const query = `
+      SELECT id, artists, albums,  date 
+      FROM music 
+      WHERE LOWER(REPLACE(genres, ' ', '')) = $1 ORDER BY date ASC;
+    `;
+    const { rows } = await pool.query(query, [genre]);
+    console.log(`Query result:`, rows);
+    return rows;
+  } catch (error) {
+    console.error("Error getting genre:", error);
+    throw new Error("Failed to retrieve genre");
+  }
+}
+
 async function insertAlbum(artist, album, genre, trueDate) {
   await pool.query(
     "INSERT INTO music(artists, albums, genres, date) VALUES ($1, $2, $3, $4)",
@@ -110,6 +127,7 @@ module.exports = {
   getArtists,
   getArtist,
   getGenres,
+  getGenre,
   getDate,
   insertAlbum,
 };
