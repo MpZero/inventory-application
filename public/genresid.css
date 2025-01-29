@@ -1,3 +1,108 @@
-.albums-wrapper {
-  display: flex;
+@import url("https://fonts.googleapis.com/css2?family=Kanit&family=Oswald:wght@200..700&family=Poppins&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik&display=swap");
+
+main {
+  color: #ffffff;
+  padding: 1rem;
 }
+
+.genres-h1 {
+  border-bottom: 1px solid #666;
+}
+
+.desc-wrapper {
+  margin-block: 1rem;
+}
+
+.albums-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+}
+
+.album-wrapper {
+  background-color: white;
+  border-radius: 8px;
+
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+  padding: 0.2rem;
+}
+.album-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+.album-img {
+  width: 100%;
+  border-radius: 8px;
+}
+.album-link {
+  border-radius: 8px;
+  padding: 0.2rem;
+}
+.album-info-wrapper {
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(0.6rem, 2.5vw, 0.8rem);
+  margin-block: 0.2rem;
+}
+
+/* .album-info-wrapper > a,
+.album-info-wrapper > p {
+  font-family: "Poppins", "Roboto", "Rubik";
+} */
+
+.album-info-wrapper > a:nth-child(1) {
+  margin-block: 0.2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.album-info-wrapper > a {
+  text-decoration: none;
+  color: #5cabeb;
+}
+
+.album-info-wrapper > a:hover {
+  text-decoration: underline;
+  color: #4f94d5;
+}
+
+.back-link-wrapper {
+  margin: 1rem;
+  margin-left: 0;
+}
+
+.back-link {
+  color: #83c4fa;
+  text-decoration: underline;
+  transition: color 0.3s ease-in-out;
+}
+.back-link:hover {
+  text-decoration: none;
+  color: #83fafa;
+}
+
+@media (min-width: 600px) {
+  .albums-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 800px) {
+  .albums-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* @media (min-width: 1024px) {
+  .albums-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+} */

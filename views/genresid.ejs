@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="footer.css" />
     <link rel="stylesheet" href="genresid.css" />
 
-    <title>genresID</title>
+    <title><%= title %></title>
   </head>
   <body>
     <%- include("./navbar"); %>
@@ -19,7 +19,7 @@
     <div class="genresid-div-wrapper">
       <%- include("./header"); %>
       <main>
-        <h1><%= name%></h1>
+        <h1 class="genres-h1"><%= name %></h1>
 
         <div class="desc-wrapper">
           <p>Description:</p>
@@ -32,22 +32,24 @@
         </div>
         <div class="albums-wrapper">
           <% genre.map(genre => { %>
-          <div class="genres-wrapper">
-            <a
-              class="genres-link"
-              href="albums/<%= regExpFunction(genre.albums) %>"
-            >
+          <div class="album-wrapper">
+            <a href="/albums/<%= regExpFunction(genre.albums)%>">
               <img
-                class="genres-img"
+                class="album-img"
                 src="https://placehold.co/150x150"
                 alt=""
                 srcset=""
               />
-              <div class="album-info-wrapper">
-                <p><%= genre.albums %></p>
-                <p>Release: <%= new Date(genre.date).toLocaleDateString()%></p>
-              </div>
             </a>
+            <div class="album-info-wrapper">
+              <a href="/albums/<%= regExpFunction(genre.albums)%>"
+                ><%= genre.albums %></a
+              >
+              <a href="/artists/<%= regExpFunction(genre.artists)%>"
+                ><%= genre.artists %></a
+              >
+              <p>Release: <%= new Date(genre.date).toLocaleDateString()%></p>
+            </div>
           </div>
           <% }); %>
         </div>

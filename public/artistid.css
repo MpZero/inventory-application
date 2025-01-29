@@ -45,7 +45,7 @@ main {
 
 .artist-wrapper {
   background-color: white;
-  font-size: 0.4rem;
+  /* font-size: 0.4rem; */
   /* max-width: 150px; */
   /* max-height: 300px; */
   border-radius: 8px;
@@ -84,12 +84,13 @@ main {
 }
 
 .artist-link p:nth-child(1) {
+  color: #5cabeb;
   font-weight: bold;
   transition: color 0.3s ease-in-out;
 }
 
 .artist-link:hover p:nth-child(1) {
-  color: rgb(42, 160, 210);
+  color: #4f94d5;
   text-decoration: underline;
 }
 
@@ -125,6 +126,7 @@ main {
 .back-link {
   color: #83c4fa;
   text-decoration: underline;
+  transition: color 0.3s ease-in-out;
 }
 .back-link:hover {
   text-decoration: none;

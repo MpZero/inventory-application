@@ -20,10 +20,10 @@ async function getAllGenres(req, res) {
 }
 
 async function getGenre(req, res) {
-  console.log("Route parameters:", req.params);
+  // console.log("Route parameters:", req.params);
 
   const genre = req.params.id;
-  console.log("genre from route:", genre);
+  // console.log("genre from route:", genre);
 
   try {
     const genreData = await db.getGenre(genre);
@@ -33,12 +33,12 @@ async function getGenre(req, res) {
       return res.status(404).send("genre not found");
     }
 
-    console.log(`genres data bro`, genreData);
+    // console.log(`genres data bro`, genreData);
 
     res.render("genresid", {
-      title: genreData[0].genre,
+      title: genreData[0].genres,
       genre: genreData,
-      name: genreData[0].genre,
+      name: genreData[0].genres,
       regExpFunction,
     });
   } catch (error) {

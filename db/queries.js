@@ -100,9 +100,9 @@ async function getGenre(genre) {
   console.log(`Querying for genre: ${genre}`);
   try {
     const query = `
-      SELECT id, artists, albums,  date 
+      SELECT id, artists, albums, genres,  date 
       FROM music 
-      WHERE LOWER(REPLACE(genres, ' ', '')) = $1 ORDER BY date ASC;
+      WHERE LOWER(REPLACE(genres, ' ', '')) = $1 ORDER BY albums ASC;
     `;
     const { rows } = await pool.query(query, [genre]);
     console.log(`Query result:`, rows);
