@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <% album.map((album) => { %>
+
+    <form action="/<%= album.id %>/update" method="POST">
+      <input type="text" name="name" value="<%= album.albums %>" required />
+      <input type="text" name="artist" value="<%= album.artists %>" required />
+      <input type="text" name="genre" value="<%= album.genres %>" required />
+      <input
+        type="date"
+        name="date"
+        value="<%= new Date(album.date).toLocaleDateString() %>"
+        required
+      />
+
+      <button type="submit">Update User</button>
+    </form>
+    <% })%>
+    <a href="/">Back to home</a>
+  </body>
+</html>

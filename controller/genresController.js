@@ -27,7 +27,7 @@ async function getGenre(req, res) {
 
   try {
     const genreData = await db.getGenre(genre);
-    console.log("Query result:", genreData);
+    // console.log("Query result:", genreData);
 
     if (genreData.length === 0) {
       return res.status(404).send("genre not found");

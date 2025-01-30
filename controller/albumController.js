@@ -84,4 +84,48 @@ async function createAlbumPost(req, res) {
   }
 }
 
-module.exports = { getAllAlbums, getAlbum, createAlbumGet, createAlbumPost };
+async function getAlbumUpdate(req, res) {
+  // console.log(`controller getalbumupdate req params`, req.params);
+
+  const album = await db.getAlbum(req.params.album);
+  console.log(`get album update: album`, album);
+
+  res.render("updateAlbum", {
+    title: "Update Album",
+    album: album,
+  });
+}
+
+/* async function postAlbumUpdate(req, res) {
+  [
+    validateUser,
+    (req, res) => {
+      const user = usersStorage.getUser(req.params.id);
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).render("updateUser", {
+          title: "Update user",
+          user: user,
+          errors: errors.array(),
+        });
+      }
+      const { firstName, lastName, email, age, bio } = req.body;
+      usersStorage.updateUser(req.params.id, {
+        firstName,
+        lastName,
+        email,
+        age,
+        bio,
+      });
+      res.redirect("/");
+    },
+  ];
+} */
+module.exports = {
+  getAllAlbums,
+  getAlbum,
+  createAlbumGet,
+  createAlbumPost,
+  getAlbumUpdate,
+  // postAlbumUpdate,
+};
