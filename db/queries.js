@@ -120,14 +120,26 @@ async function insertAlbum(artist, album, genre, trueDate) {
   );
 }
 
+async function updateAlbum(artist, album, genre, date, id) {
+  const result = await pool.query(
+    `UPDATE music
+     SET artists = $1, albums = $2, genres = $3, date = $4
+     WHERE id = $5`,
+    [artist, album, genre, date, id]
+  );
+
+  return result;
+}
+
 module.exports = {
   getAll,
   getAlbums,
   getAlbum,
+  insertAlbum,
+  updateAlbum,
   getArtists,
   getArtist,
   getGenres,
   getGenre,
   getDate,
-  insertAlbum,
 };

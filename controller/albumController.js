@@ -93,39 +93,29 @@ async function getAlbumUpdate(req, res) {
   res.render("updateAlbum", {
     title: "Update Album",
     album: album,
+    regExpFunction,
   });
 }
 
-/* async function postAlbumUpdate(req, res) {
-  [
-    validateUser,
-    (req, res) => {
-      const user = usersStorage.getUser(req.params.id);
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).render("updateUser", {
-          title: "Update user",
-          user: user,
-          errors: errors.array(),
-        });
-      }
-      const { firstName, lastName, email, age, bio } = req.body;
-      usersStorage.updateUser(req.params.id, {
-        firstName,
-        lastName,
-        email,
-        age,
-        bio,
-      });
-      res.redirect("/");
-    },
-  ];
-} */
+async function postAlbumUpdate(req, res) {
+  try {
+    const { albums, artist, genre, date } = req.body;
+    const albumId = req.params.album;
+
+    await db.updateAlbum(artist, albums, genre, date, albumId);
+
+    res.redirect("/");
+  } catch (error) {
+    console.error("Error updating album:", error);
+    res.status(500).send("Failed to update album");
+  }
+}
+
 module.exports = {
   getAllAlbums,
   getAlbum,
   createAlbumGet,
   createAlbumPost,
   getAlbumUpdate,
-  // postAlbumUpdate,
+  postAlbumUpdate,
 };
