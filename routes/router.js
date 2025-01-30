@@ -7,6 +7,7 @@ const {
   createAlbumGet,
   getAlbumUpdate,
   postAlbumUpdate,
+  deleteAlbum,
 } = require("../controller/albumController");
 const { getAllArtists, getArtist } = require("../controller/artistController");
 const { getAllGenres, getGenre } = require("../controller/genresController");
@@ -27,12 +28,12 @@ router.get("/contact", (req, res) => res.render("contact.ejs"));
 //// albums ////
 // router.get("/albums", (req, res) => res.render("albums.ejs"));
 router.get("/albums", getAllAlbums);
-
 router.get("/albums/new", createAlbumGet);
 router.post("/new", createAlbumPost);
 router.get("/albums/:album", getAlbum);
 router.get("/albums/:album/update", getAlbumUpdate);
 router.post("/albums/:album/update", postAlbumUpdate);
+router.post("/albums/:album/delete", deleteAlbum);
 
 //// artists ////
 router.get("/artists", getAllArtists);

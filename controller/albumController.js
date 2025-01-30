@@ -29,14 +29,14 @@ async function getAllAlbums(req, res) {
 }
 
 async function getAlbum(req, res) {
-  console.log("Route parameters:", req.params);
+  // console.log("Route parameters:", req.params);
 
   const album = req.params.album;
-  console.log("Album from route:", album);
+  // console.log("Album from route:", album);
 
   try {
     const albumData = await db.getAlbum(album);
-    console.log("Query result:", albumData);
+    // console.log("Query result:", albumData);
 
     if (albumData.length === 0) {
       return res.status(404).send("Album not found");
@@ -88,7 +88,7 @@ async function getAlbumUpdate(req, res) {
   // console.log(`controller getalbumupdate req params`, req.params);
 
   const album = await db.getAlbum(req.params.album);
-  console.log(`get album update: album`, album);
+  // console.log(`get album update: album`, album);
 
   res.render("updateAlbum", {
     title: "Update Album",
@@ -111,6 +111,17 @@ async function postAlbumUpdate(req, res) {
   }
 }
 
+async function deleteAlbum(req, res) {
+  try {
+    const albumId = req.params.album;
+    await db.deleteAlbum(albumId);
+    res.redirect("/albums");
+  } catch (error) {
+    console.error("Error deleting album:", error);
+    res.status(500).send("Failed to delete album");
+  }
+}
+
 module.exports = {
   getAllAlbums,
   getAlbum,
@@ -118,4 +129,5 @@ module.exports = {
   createAlbumPost,
   getAlbumUpdate,
   postAlbumUpdate,
+  deleteAlbum,
 };

@@ -49,7 +49,7 @@ async function getAlbum(album) {
       WHERE LOWER(REPLACE(albums, ' ', '')) = $1;
     `;
     const { rows } = await pool.query(query, [album]);
-    console.log(`Query result:`, rows);
+    // console.log(`Query result:`, rows);
     return rows;
   } catch (error) {
     console.error("Error getting album:", error);
@@ -131,12 +131,22 @@ async function updateAlbum(artist, album, genre, date, id) {
   return result;
 }
 
+async function deleteAlbum(id) {
+  try {
+    await pool.query("DELETE FROM music WHERE id = $1", [id]);
+  } catch (error) {
+    console.error("Error getting genre:", error);
+    throw new Error("Failed to retrieve genre");
+  }
+}
+
 module.exports = {
   getAll,
   getAlbums,
   getAlbum,
   insertAlbum,
   updateAlbum,
+  deleteAlbum,
   getArtists,
   getArtist,
   getGenres,
