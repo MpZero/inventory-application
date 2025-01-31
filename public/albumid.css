@@ -53,6 +53,43 @@ main {
 .p-score {
   color: gold;
 }
+.update-link,
+.delete-form {
+  margin: 1rem 1rem 1rem 0;
+}
+.update-btn,
+.delete-btn {
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.update-btn:hover,
+.delete-btn:hover {
+  transform: translateY(-4px);
+}
+
+.update-btn {
+  background-color: royalblue;
+  color: white;
+}
+.update-btn:hover {
+  color: royalblue;
+  background-color: white;
+  text-decoration: underline;
+}
+
+.delete-btn {
+  background-color: crimson;
+  color: white;
+}
+.delete-btn:hover {
+  color: crimson;
+  background-color: white;
+}
 
 .desc-wrapper {
   border-top: 1px solid #666;
@@ -83,8 +120,7 @@ main {
 
   .album-img-wrapper {
     margin-left: 1rem;
-    padding: 1rem;
-    border: 1px solid #404040;
+    /* border: 1px solid #404040; */
     margin-top: 0;
   }
 
@@ -98,10 +134,28 @@ main {
     border-bottom: 1px solid #404040;
   }
 
-  /* .desc-wrapper {
+  .update-btn,
+  .delete-btn {
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+@media (min-width: 950px) {
+  .album-img-wrapper {
+    border: 1px solid #404040;
+    padding: 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .album-img-wrapper {
+    border: none;
     padding: 1rem;
-    display: flex;
-    grid-column: 1/3;
-    gap: 0.5rem;
-  } */
+  }
+}
+
+@media (min-width: 1270px) {
+  .album-img-wrapper {
+    border: 1px solid #404040;
+  }
 }
