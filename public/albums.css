@@ -24,11 +24,20 @@
   max-width: 150px;
   max-height: 300px;
   border-radius: 8px;
-  transition: all 0.1s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   text-align: center;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  will-change: transform;
+}
+
+.album-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+.album-wrapper:hover > .albums-link p:nth-child(1) {
+  color: royalblue;
 }
 
 .post-album-btn {
@@ -42,11 +51,14 @@
   color: white;
   background-color: #f99400;
   border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
   will-change: transform;
 }
 
 .post-album-btn:hover {
+  color: #f99400;
+  background-color: white;
   transform: translateY(-4px);
 }
 
