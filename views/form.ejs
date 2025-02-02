@@ -7,15 +7,19 @@
   </head>
   <body>
     <div class="form-wrapper">
+      <div class="text-wrapper">
+        <h1>Add a new Artist!</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      </div>
       <form class="form" action="/new" method="post">
-        <label for="artist">artist</label>
-        <input type="text" name="artist" id="artist" />
-        <label for="album">album</label>
-        <input type="text" name="album" id="album" />
-        <label for="genre">genre</label>
-        <input type="text" name="genre" id="genre" />
-        <label for="date">date</label>
-        <input type="date" name="date" id="date" />
+        <label for="artist">Artist's name</label>
+        <input type="text" name="artist" id="artist" required />
+        <label for="album">Album's name</label>
+        <input type="text" name="album" id="album" required />
+        <label for="genre">Genre</label>
+        <input type="text" name="genre" id="genre" required />
+        <label for="date">Release Date</label>
+        <input type="date" name="date" id="date" required />
         <button class="submit-btn" type="submit">Submit</button>
       </form>
       <div class="back-link-wrapper">

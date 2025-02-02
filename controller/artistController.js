@@ -39,4 +39,28 @@ async function getArtist(req, res) {
   }
 }
 
-module.exports = { getAllArtists, getArtist };
+async function createArtistGet(req, res) {
+  res.render("artistspost");
+}
+async function createArtistPost(req, res) {
+  console.log(res.body);
+  const artist = req.body;
+
+  try {
+    if (!artist) {
+      return res.status(400).send("Artist name is required");
+    }
+    await db.insertArtist(artist);
+    res.redirect("/artists");
+  } catch (error) {
+    console.log("Error creating artist", error);
+    res.status(500).send("Error creating artist");
+  }
+}
+
+module.exports = {
+  getAllArtists,
+  getArtist,
+  createArtistGet,
+  createArtistPost,
+};

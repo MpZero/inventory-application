@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css" />
-    <title>Document</title>
+    <base href="/" />
+
+    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="artistspost.css" />
+    <link rel="stylesheet" href="footer.css" />
+    <title>asdsdada</title>
   </head>
   <body>
     <%- include("./navbar"); %>
+    <div>
+      <%- include("./header"); %>
+      <div class="text-wrapper">
+        <h1 >Add a new Artist!</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      </div>
+      <div class="form-wrapper">
+        <form class="form" action="/new" method="post">
 
-    <h1>Artists POST</h1>
+          
+          <label for="artist">Artist's name</label>
+          <input type="text" name="artist" id="artist" required />
+          <button class="submit-btn" type="submit">Submit</button>
+        </form>
+        <div class="back-link-wrapper">
+          <a class="back-link" href="/artists">Go back</a>
+        </div>
+      </div>
+      <%- include("./footer"); %>
+      </div>
+    </div>
   </body>
 </html>

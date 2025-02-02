@@ -9,7 +9,12 @@ const {
   postAlbumUpdate,
   deleteAlbum,
 } = require("../controller/albumController");
-const { getAllArtists, getArtist } = require("../controller/artistController");
+const {
+  getAllArtists,
+  getArtist,
+  createArtistGet,
+  createArtistPost,
+} = require("../controller/artistController");
 const { getAllGenres, getGenre } = require("../controller/genresController");
 
 //homepage
@@ -37,11 +42,9 @@ router.post("/albums/:album/delete", deleteAlbum);
 
 //// artists ////
 router.get("/artists", getAllArtists);
-
-router.get("/artists/new", (req, res) => res.render("artistspost.ejs"));
+router.get("/artists/new", createArtistGet);
+// router.post("artists/new", createArtistPost);
 router.get("/artists/:artist", getArtist);
-
-router.post("/artists/new", (req, res) => res.render("artistpost.ejs"));
 
 //// genres ////
 router.get("/genres", getAllGenres);
