@@ -1,16 +1,24 @@
 const pool = require("./pool");
 
-async function getAll(sort, direction) {
+async function getAllAlbums(sort, direction) {
+  const query = `
+        SELECT  artists.name AS artist, albums.title AS title, genres.name AS genre, albums.release_date AS date
+        FROM albums
+        JOIN artists ON albums.artist_id = artists.id
+        JOIN genres ON albums.id = genres.id
+`;
   try {
     if (!sort && !direction) {
-      const { rows } = await pool.query(`SELECT * FROM music`);
+      const { rows } = await pool.query(query);
+      // console.log(`query rows`, rows);
+
       return rows;
     } else if (sort && !direction) {
-      const { rows } = await pool.query(`SELECT * FROM music ORDER BY ${sort}`);
+      const { rows } = await pool.query(`${query} ORDER BY ${sort};`);
       return rows;
     } else {
       const { rows } = await pool.query(
-        `SELECT * FROM music ORDER BY ${sort} ${direction}`
+        `${query} ORDER BY ${sort} ${direction};`
       );
       return rows;
     }
@@ -161,7 +169,7 @@ async function getGenre(genre) {
 }
 
 module.exports = {
-  getAll,
+  getAllAlbums,
   getAlbums,
   getAlbum,
   insertAlbum,

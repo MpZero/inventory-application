@@ -19,11 +19,11 @@
 
       <main class="albums-main">
         <h1 class="albums-h1">All Albums</h1>
-        <% all.map(all => { %>
+        <% albums.map(album => { %>
         <div class="album-wrapper">
           <a
             class="albums-link"
-            href="albums/<%= regExpFunction(all.albums) %>"
+            href="albums/<%= regExpFunction(album.title) %>"
           >
             <img
               class="album-img"
@@ -31,9 +31,9 @@
               alt=""
               srcset=""
             />
-            <p><%= all.albums %></p>
-            <p><%= all.artists %></p>
-            <p>Release: <%= new Date(all.date).toLocaleDateString()%></p>
+            <p><%= album.title %></p>
+            <p><%= album.artists %></p>
+            <p>Release: <%= new Date(album.date).toLocaleDateString()%></p>
           </a>
         </div>
         <% }); %>
