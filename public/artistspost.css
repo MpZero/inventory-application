@@ -3,7 +3,7 @@
 }
 
 .text-wrapper {
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .text-wrapper h1 {
@@ -18,6 +18,7 @@
 .form-wrapper {
   color: white;
   padding: 1rem;
+  padding: 0 1rem 1rem 1rem;
 }
 .form {
   color: black;
@@ -103,6 +104,11 @@ label {
     padding-left: 2rem;
     justify-content: start;
     align-items: start;
+  }
+
+  .form-wrapper {
+    max-width: 500px;
+    min-height: 50vh;
   }
 
   /* .main-wrapper h1 {

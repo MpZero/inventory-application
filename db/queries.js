@@ -29,6 +29,9 @@ async function getDate() {
     throw new Error("Failed to retrieve all dates");
   }
 }
+////////////////////////////////////////////
+//////////////* ALBUMS *////////////////////
+////////////////////////////////////////////
 
 async function getAlbums() {
   try {
@@ -57,6 +60,36 @@ async function getAlbum(album) {
   }
 }
 
+async function insertAlbum(artist, album, genre, trueDate) {
+  await pool.query(
+    "INSERT INTO music(artists, albums, genres, date) VALUES ($1, $2, $3, $4)",
+    [artist, album, genre, trueDate]
+  );
+}
+
+async function updateAlbum(artist, album, genre, date, id) {
+  const result = await pool.query(
+    `UPDATE music
+     SET artists = $1, albums = $2, genres = $3, date = $4
+     WHERE id = $5`,
+    [artist, album, genre, date, id]
+  );
+
+  return result;
+}
+
+async function deleteAlbum(id) {
+  try {
+    await pool.query("DELETE FROM music WHERE id = $1", [id]);
+  } catch (error) {
+    console.error("Error getting genre:", error);
+    throw new Error("Failed to retrieve genre");
+  }
+}
+////////////////////////////////////////////
+////////////////* ARTISTS */////////////////
+////////////////////////////////////////////
+
 async function getArtists() {
   try {
     const { rows } = await pool.query("SELECT  DISTINCT artists FROM music");
@@ -73,9 +106,12 @@ async function getArtist(artist) {
     const query = `
       SELECT id, artists, albums,  date 
       FROM music 
-      WHERE LOWER(REPLACE(artists, ' ', '')) = $1 ORDER BY date ASC;
+      WHERE LOWER(REPLACE(artists, ' ', '')) = $1 
+      AND date IS NOT NULL
+      ORDER BY date ASC;
     `;
     const { rows } = await pool.query(query, [artist]);
+
     console.log(`Query result:`, rows);
     return rows;
   } catch (error) {
@@ -83,6 +119,17 @@ async function getArtist(artist) {
     throw new Error("Failed to retrieve artist");
   }
 }
+async function insertArtist(artist) {
+  const { row } = await pool.query(
+    `INSERT INTO music(artists, albums, genres, date) VALUES ($1, NULL, NULL, NULL)`,
+    [artist]
+  );
+  return row;
+}
+
+////////////////////////////////////////////
+////////////////* GENRES *//////////////////
+////////////////////////////////////////////
 
 async function getGenres() {
   try {
@@ -113,33 +160,6 @@ async function getGenre(genre) {
   }
 }
 
-async function insertAlbum(artist, album, genre, trueDate) {
-  await pool.query(
-    "INSERT INTO music(artists, albums, genres, date) VALUES ($1, $2, $3, $4)",
-    [artist, album, genre, trueDate]
-  );
-}
-
-async function updateAlbum(artist, album, genre, date, id) {
-  const result = await pool.query(
-    `UPDATE music
-     SET artists = $1, albums = $2, genres = $3, date = $4
-     WHERE id = $5`,
-    [artist, album, genre, date, id]
-  );
-
-  return result;
-}
-
-async function deleteAlbum(id) {
-  try {
-    await pool.query("DELETE FROM music WHERE id = $1", [id]);
-  } catch (error) {
-    console.error("Error getting genre:", error);
-    throw new Error("Failed to retrieve genre");
-  }
-}
-
 module.exports = {
   getAll,
   getAlbums,
@@ -149,6 +169,7 @@ module.exports = {
   deleteAlbum,
   getArtists,
   getArtist,
+  insertArtist,
   getGenres,
   getGenre,
   getDate,

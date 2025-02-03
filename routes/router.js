@@ -43,7 +43,7 @@ router.post("/albums/:album/delete", deleteAlbum);
 //// artists ////
 router.get("/artists", getAllArtists);
 router.get("/artists/new", createArtistGet);
-// router.post("artists/new", createArtistPost);
+router.post("/artists/new", createArtistPost);
 router.get("/artists/:artist", getArtist);
 
 //// genres ////

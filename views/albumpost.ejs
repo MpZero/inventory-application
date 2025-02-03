@@ -9,16 +9,12 @@
     <link rel="stylesheet" href="navbar.css" />
     <link rel="stylesheet" href="header.css" />
     <link rel="stylesheet" href="footer.css" />
-    <!-- <link rel="stylesheet" href="index.css" /> -->
   </head>
   <body>
     <%- include("./navbar"); %>
     <div>
       <%- include("./header"); %>
-      <main class="main-wrapper">
-        <h1>Add new Album</h1>
-        <%- include("./form"); %>
-      </main>
+      <main class="main-wrapper"><%- include("./form"); %></main>
       <%- include("./footer"); %>
     </div>
   </body>

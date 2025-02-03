@@ -43,8 +43,8 @@ async function createArtistGet(req, res) {
   res.render("artistspost");
 }
 async function createArtistPost(req, res) {
-  console.log(res.body);
-  const artist = req.body;
+  console.log(req.body);
+  const artist = req.body.artist;
 
   try {
     if (!artist) {
