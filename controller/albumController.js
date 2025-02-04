@@ -19,19 +19,19 @@ async function getAllAlbums(req, res) {
 async function getAlbum(req, res) {
   // console.log("Route parameters:", req.params);
 
-  const album = req.params.album;
+  const album = req.params;
   // console.log("Album from route:", album);
 
   try {
-    const albumData = await db.getAlbum(album);
-    // console.log("Query result:", albumData);
+    const albumData = await db.getAlbum(album.album);
+    // console.log("controller result:", albumData);
 
     if (albumData.length === 0) {
       return res.status(404).send("Album not found");
     }
 
     res.render("albumid", {
-      title: albumData[0].albums,
+      title: albumData[0].title,
       album: albumData,
       regExpFunction,
     });

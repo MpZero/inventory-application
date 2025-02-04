@@ -2,7 +2,7 @@ const pool = require("./pool");
 
 async function getAllAlbums(sort, direction) {
   const query = `
-        SELECT  artists.name AS artist, albums.title AS title, genres.name AS genre, albums.release_date AS date
+        SELECT  albums.id AS id, albums.title AS title, artists.name AS artist, genres.name AS genre, albums.release_date AS date
         FROM albums
         JOIN artists ON albums.artist_id = artists.id
         JOIN genres ON albums.id = genres.id
@@ -28,38 +28,42 @@ async function getAllAlbums(sort, direction) {
   }
 }
 
-async function getDate() {
-  try {
-    const { rows } = await pool.query("SELECT date FROM music");
-    return rows;
-  } catch (error) {
-    console.error("Error getting all dates:", error);
-    throw new Error("Failed to retrieve all dates");
-  }
-}
+// async function getDate() {
+//   try {
+//     const { rows } = await pool.query("SELECT date FROM music");
+//     return rows;
+//   } catch (error) {
+//     console.error("Error getting all dates:", error);
+//     throw new Error("Failed to retrieve all dates");
+//   }
+// }
 ////////////////////////////////////////////
 //////////////* ALBUMS *////////////////////
 ////////////////////////////////////////////
 
-async function getAlbums() {
-  try {
-    const { rows } = await pool.query("SELECT albums FROM music");
-    return rows;
-  } catch (error) {
-    console.error("Error getting all albums:", error);
-    throw new Error("Failed to retrieve all albums");
-  }
-}
+// async function getAlbums() {
+//   try {
+//     const { rows } = await pool.query("SELECT albums FROM music");
+//     return rows;
+//   } catch (error) {
+//     console.error("Error getting all albums:", error);
+//     throw new Error("Failed to retrieve all albums");
+//   }
+// }
 
-async function getAlbum(album) {
+async function getAlbum(id) {
   // console.log(`Querying for album: ${album}`);
+  // WHERE LOWER(REPLACE(title, ' ', '')) = $1;
+
   try {
     const query = `
-      SELECT id, artists, albums, genres, date 
-      FROM music 
-      WHERE LOWER(REPLACE(albums, ' ', '')) = $1;
-    `;
-    const { rows } = await pool.query(query, [album]);
+      SELECT albums.id AS id, albums.title AS title, artists.name AS artist, genres.name AS genre, albums.release_date AS date 
+      FROM albums 
+      JOIN artists ON albums.id = artists.id
+      JOIN genres ON albums.id = genres.id
+      WHERE albums.id = $1;
+      `;
+    const { rows } = await pool.query(query, [id]);
     // console.log(`Query result:`, rows);
     return rows;
   } catch (error) {
@@ -170,7 +174,7 @@ async function getGenre(genre) {
 
 module.exports = {
   getAllAlbums,
-  getAlbums,
+  getAlbum,
   getAlbum,
   insertAlbum,
   updateAlbum,
@@ -180,5 +184,5 @@ module.exports = {
   insertArtist,
   getGenres,
   getGenre,
-  getDate,
+  // getDate,
 };

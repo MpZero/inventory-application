@@ -19,7 +19,7 @@
       <%- include("./header"); %>
       <main>
         <% album.map(album => { %>
-        <h1 class="album-h1"><%= album.albums %></h1>
+        <h1 class="album-h1"><%= album.title %></h1>
         <div class="album-img-wrapper">
           <img
             class="album-img"
@@ -32,20 +32,20 @@
           <p>Artist</p>
 
           <a
-            href="artists/<%= regExpFunction(album.artists)%>"
+            href="artists/<%= regExpFunction(album.artist)%>"
             class="artists-link"
           >
-            <p><%= album.artists %></p>
+            <p><%= album.artist %></p>
           </a>
           <p>Release</p>
           <p><%= new Date(album.date).toLocaleDateString()%></p>
 
           <p>Genre</p>
           <a
-            href="genres/<%= regExpFunction(album.genres)%>"
+            href="genres/<%= regExpFunction(album.genre)%>"
             class="genres-link"
           >
-            <p><%= album.genres %></p>
+            <p><%= album.genre %></p>
           </a>
           <p>Score</p>
           <p class="p-score">9/10</p>
@@ -53,9 +53,7 @@
           <p>Ranking</p>
           <p class="p-ranking">#1</p>
 
-          <a
-            class="update-link"
-            href="/albums/<%= regExpFunction(album.albums) %>/update"
+          <a class="update-link" href="/albums/<%= album.id %>/update"
             ><button class="update-btn">Update</button></a
           >
           <form
