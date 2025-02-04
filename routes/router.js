@@ -34,11 +34,11 @@ router.get("/contact", (req, res) => res.render("contact.ejs"));
 // router.get("/albums", (req, res) => res.render("albums.ejs"));
 router.get("/albums", getAllAlbums);
 router.get("/albums/new", createAlbumGet);
-router.post("/new", createAlbumPost);
-router.get("/albums/:album", getAlbum);
-router.get("/albums/:album/update", getAlbumUpdate);
-router.post("/albums/:album/update", postAlbumUpdate);
-router.post("/albums/:album/delete", deleteAlbum);
+router.post("albums/new", createAlbumPost);
+router.get("/albums/:id", getAlbum);
+router.get("/albums/:id/update", getAlbumUpdate);
+router.post("/albums/:id/update", postAlbumUpdate);
+router.post("/albums/:id/delete", deleteAlbum);
 
 //// artists ////
 router.get("/artists", getAllArtists);

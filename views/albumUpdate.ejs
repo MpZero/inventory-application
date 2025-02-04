@@ -26,21 +26,16 @@
           <input
             type="text"
             name="albums"
-            value="<%= album.albums %>"
+            value="<%= album.title %>"
             required
           />
           <input
             type="text"
             name="artist"
-            value="<%= album.artists %>"
+            value="<%= album.artist %>"
             required
           />
-          <input
-            type="text"
-            name="genre"
-            value="<%= album.genres %>"
-            required
-          />
+          <input type="text" name="genre" value="<%= album.genre %>" required />
           <input
             type="date"
             name="date"
@@ -51,11 +46,7 @@
         </form>
 
         <div class="back-link-wrapper">
-          <a
-            class="back-link"
-            href="/albums/<%= regExpFunction(album.albums) %>/"
-            >Back</a
-          >
+          <a class="back-link" href="/albums/<%= album.id %>/">Back</a>
         </div>
       </div>
       <% })%> <%- include("./footer"); %>

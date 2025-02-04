@@ -18,18 +18,14 @@ async function getAllAlbums(req, res) {
 
 async function getAlbum(req, res) {
   // console.log("Route parameters:", req.params);
-
-  const album = req.params;
-  // console.log("Album from route:", album);
-
+  const albumId = req.params.id;
+  // console.log("Album from route:", albumId);
   try {
-    const albumData = await db.getAlbum(album.album);
+    const albumData = await db.getAlbum(albumId);
     // console.log("controller result:", albumData);
-
     if (albumData.length === 0) {
       return res.status(404).send("Album not found");
     }
-
     res.render("albumid", {
       title: albumData[0].title,
       album: albumData,
@@ -44,26 +40,17 @@ async function getAlbum(req, res) {
 function createAlbumGet(req, res) {
   res.render("albumpost", { title: "Create Album" });
 }
+
 async function createAlbumPost(req, res) {
   console.log(res.body);
   const { artist, album, genre, date } = req.body;
 
   try {
-    // const artist = res.body.artist;
-    // const album = res.body.name;
-    // const genre = res.body.genre;
-    // const date = res.body.date;
-    // const data = { artists: artist, albums: album, genre: genre, date: date };
-    // const data = { artist, album, genre, date };
-    // console.log("Data:", data);
-
     if (!album) {
       return res.status(400).send("Album name is required");
     } else if (!artist) {
       return res.status(400).send("Artist name is required");
     }
-
-    // await db.insertAlbum(data);
     await db.insertAlbum(artist, album, genre, date);
     res.redirect("/albums");
   } catch (error) {
@@ -73,12 +60,10 @@ async function createAlbumPost(req, res) {
 }
 
 async function getAlbumUpdate(req, res) {
-  // console.log(`controller getalbumupdate req params`, req.params);
+  const album = await db.getAlbum(req.params.id);
+  console.log(`get album update: album`, album);
 
-  const album = await db.getAlbum(req.params.album);
-  // console.log(`get album update: album`, album);
-
-  res.render("updateAlbum", {
+  res.render("albumUpdate", {
     title: "Update Album",
     album: album,
     regExpFunction,
@@ -87,12 +72,17 @@ async function getAlbumUpdate(req, res) {
 
 async function postAlbumUpdate(req, res) {
   try {
-    const { albums, artist, genre, date } = req.body;
-    const albumId = req.params.album;
+    console.log(`postAlbumUpdate req.body: `, req.body);
 
-    await db.updateAlbum(artist, albums, genre, date, albumId);
+    const { id, albums, artist, genre, date } = req.body;
 
-    res.redirect("/");
+    console.log(
+      `Updating album with ID: ${id}, Title: ${albums}, Artist: ${artist}, Genre: ${genre}, Date: ${date}`
+    );
+
+    await db.updateAlbum(artist, albums, genre, date, id);
+
+    res.redirect(`/albums/${id}`);
   } catch (error) {
     console.error("Error updating album:", error);
     res.status(500).send("Failed to update album");
