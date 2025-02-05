@@ -133,10 +133,10 @@ async function updateAlbum(artist, album, genre, date, id) {
 
 async function deleteAlbum(id) {
   try {
-    await pool.query("DELETE FROM music WHERE id = $1", [id]);
+    await pool.query("DELETE FROM albums WHERE id = $1", [id]);
   } catch (error) {
-    console.error("Error getting genre:", error);
-    throw new Error("Failed to retrieve genre");
+    console.error("Error deleting album:", error);
+    throw new Error("Failed to delete album");
   }
 }
 ////////////////////////////////////////////

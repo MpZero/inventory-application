@@ -91,7 +91,9 @@ async function postAlbumUpdate(req, res) {
 
 async function deleteAlbum(req, res) {
   try {
-    const albumId = req.params.album;
+    const albumId = req.params.id;
+    console.log(`albumid from deleteAlbum controller`);
+
     await db.deleteAlbum(albumId);
     res.redirect("/albums");
   } catch (error) {
