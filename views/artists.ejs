@@ -21,10 +21,7 @@
         <ol>
           <% artists.map((artist) => {%>
           <li>
-            <a
-              class="artists-link"
-              href="artists/<%= regExpFunction(artist.name)%>"
-            >
+            <a class="artists-link" href="artists/<%= artist.id%>">
               <p><%= artist.name%></p>
             </a>
           </li>

@@ -12,10 +12,10 @@ async function getAllArtists(req, res) {
 }
 
 async function getArtist(req, res) {
-  // console.log("Route parameters:", req.params);
+  // console.log("Request parameters:", req.params);
 
-  const artist = req.params.artist;
-  // console.log("artist from route:", artist);
+  const artist = req.params.id;
+  // console.log("Artist from controller:", artist);
 
   try {
     const artistData = await db.getArtist(artist);
@@ -25,12 +25,10 @@ async function getArtist(req, res) {
       return res.status(404).send("artist not found");
     }
 
-    // console.log(`artis data bro`, artistData);
-
     res.render("artistsid", {
-      title: artistData[0].artists,
+      title: artistData[0].name,
       artist: artistData,
-      name: artistData[0].artists,
+      name: artistData[0].name,
       regExpFunction,
     });
   } catch (error) {

@@ -40,6 +40,7 @@ async function getAlbum(id) {
     const query = `
       SELECT 
         albums.id AS id, 
+        albums.artist_id AS artist_id,
         albums.title AS title, 
         artists.name AS artist, 
         genres.name AS genre, 
@@ -180,7 +181,7 @@ async function deleteAlbum(id) {
 
 async function getArtists() {
   try {
-    const { rows } = await pool.query("SELECT  DISTINCT name FROM artists");
+    const { rows } = await pool.query("SELECT  DISTINCT name, id FROM artists");
     return rows;
   } catch (error) {
     console.error("Error getting all artists:", error);
@@ -188,17 +189,17 @@ async function getArtists() {
   }
 }
 
-async function getArtist(artist) {
-  console.log(`Querying for artist: ${artist}`);
+async function getArtist(id) {
+  console.log(`Querying for artist: `, id);
   try {
     const query = `
-      SELECT id, artists, albums,  date 
-      FROM music 
-      WHERE LOWER(REPLACE(artists, ' ', '')) = $1 
-      AND date IS NOT NULL
-      ORDER BY date ASC;
+     SELECT artists.id AS id, artists.name AS name, albums.title AS title, albums.id AS album_id, albums.release_date AS date 
+     FROM artists
+     JOIN albums ON albums.artist_id = artists.id 
+     WHERE artists.id = $1
+     ORDER BY date ASC;
     `;
-    const { rows } = await pool.query(query, [artist]);
+    const { rows } = await pool.query(query, [id]);
 
     console.log(`Query result:`, rows);
     return rows;

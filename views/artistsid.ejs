@@ -53,10 +53,7 @@
         <div class="albums-wrapper">
           <% artist.map(artist => { %>
           <div class="artist-wrapper">
-            <a
-              class="artist-link"
-              href="albums/<%= regExpFunction(artist.albums) %>"
-            >
+            <a class="artist-link" href="albums/<%= artist.album_id %>">
               <img
                 class="artist-img"
                 src="https://placehold.co/150x150"
@@ -64,7 +61,7 @@
                 srcset=""
               />
               <div class="album-info-wrapper">
-                <p><%= artist.albums %></p>
+                <p><%= artist.title %></p>
                 <p>Release: <%= new Date(artist.date).toLocaleDateString()%></p>
               </div>
             </a>

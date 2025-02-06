@@ -44,7 +44,7 @@ router.post("/albums/:id/delete", deleteAlbum);
 router.get("/artists", getAllArtists);
 router.get("/artists/new", createArtistGet);
 router.post("/artists/new", createArtistPost);
-router.get("/artists/:artist", getArtist);
+router.get("/artists/:id", getArtist);
 /////////////////////////////////
 
 //////////// genres ////////////
