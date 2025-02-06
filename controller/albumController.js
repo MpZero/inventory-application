@@ -42,7 +42,6 @@ function createAlbumGet(req, res) {
 }
 
 async function createAlbumPost(req, res) {
-  console.log(res.body);
   const { artist, album, genre, date } = req.body;
 
   try {

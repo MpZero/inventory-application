@@ -2,10 +2,11 @@ const pool = require("./pool");
 
 async function getAllAlbums(sort, direction) {
   const query = `
-        SELECT  albums.id AS id, albums.title AS title, artists.name AS artist, genres.name AS genre, albums.release_date AS date
+        SELECT albums.id AS id, albums.title AS title, artists.name AS artist, genres.name AS genre, albums.release_date AS date
         FROM albums
         JOIN artists ON albums.artist_id = artists.id
-        JOIN genres ON albums.id = genres.id
+        JOIN genres ON albums.genre_id = genres.id;
+
 `;
   try {
     if (!sort && !direction) {
@@ -78,11 +79,64 @@ async function getAlbum(id) {
   }
 }
 
-async function insertAlbum(artist, album, genre, trueDate) {
-  await pool.query(
-    "INSERT INTO albums(artists, albums, genres, date) VALUES ($1, $2, $3, $4)",
-    [artist, album, genre, trueDate]
-  );
+async function insertAlbum(artist, album, genre, date) {
+  try {
+    // Insert artist if not exists
+    const artistQuery = `
+      INSERT INTO artists (name) 
+      VALUES ($1) 
+      ON CONFLICT (name) DO NOTHING 
+      RETURNING id;
+    `;
+    let artistResult = await pool.query(artistQuery, [artist]);
+
+    // If artist already exists, fetch the ID
+    if (artistResult.rowCount === 0) {
+      const existingArtist = await pool.query(
+        "SELECT id FROM artists WHERE name = $1",
+        [artist]
+      );
+      artistResult = existingArtist;
+    }
+    const artistId = artistResult.rows[0].id;
+
+    // Insert genre if not exists
+    const genreQuery = `
+      INSERT INTO genres (name) 
+      VALUES ($1) 
+      ON CONFLICT (name) DO NOTHING 
+      RETURNING id;
+    `;
+    let genreResult = await pool.query(genreQuery, [genre]);
+
+    // If genre already exists, fetch the ID
+    if (genreResult.rowCount === 0) {
+      const existingGenre = await pool.query(
+        "SELECT id FROM genres WHERE name = $1",
+        [genre]
+      );
+      genreResult = existingGenre;
+    }
+    const genreId = genreResult.rows[0].id;
+
+    // Insert album with artist_id and genre_id
+    const albumQuery = `
+      INSERT INTO albums (title, artist_id, genre_id, release_date) 
+      VALUES ($1, $2, $3, $4)
+      RETURNING id;
+    `;
+    const albumResult = await pool.query(albumQuery, [
+      album,
+      artistId,
+      genreId,
+      date,
+    ]);
+
+    return { albumId: albumResult.rows[0].id };
+  } catch (error) {
+    console.error("Error adding album:", error);
+    throw new Error("Failed to retrieve all artists");
+  }
 }
 
 async function updateAlbum(artist, album, genre, date, id) {
