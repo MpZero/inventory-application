@@ -84,7 +84,7 @@ li a:active {
 
 @media (min-width: 1024px) {
   .artists-main-wrapper {
-    padding: 1rem;
+    padding: 2rem;
   }
   .artists-link {
     font-size: 1rem;

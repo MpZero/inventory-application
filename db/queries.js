@@ -1,5 +1,9 @@
 const pool = require("./pool");
 
+////////////////////////////////////////////
+//////////////* ALBUMS *////////////////////
+////////////////////////////////////////////
+
 async function getAllAlbums(sort, direction) {
   const query = `
         SELECT albums.id AS id, albums.title AS title, artists.name AS artist, genres.name AS genre, albums.release_date AS date
@@ -28,29 +32,6 @@ async function getAllAlbums(sort, direction) {
     throw new Error("Failed to retrieve all");
   }
 }
-
-// async function getDate() {
-//   try {
-//     const { rows } = await pool.query("SELECT date FROM music");
-//     return rows;
-//   } catch (error) {
-//     console.error("Error getting all dates:", error);
-//     throw new Error("Failed to retrieve all dates");
-//   }
-// }
-////////////////////////////////////////////
-//////////////* ALBUMS *////////////////////
-////////////////////////////////////////////
-
-// async function getAlbums() {
-//   try {
-//     const { rows } = await pool.query("SELECT albums FROM music");
-//     return rows;
-//   } catch (error) {
-//     console.error("Error getting all albums:", error);
-//     throw new Error("Failed to retrieve all albums");
-//   }
-// }
 
 async function getAlbum(id) {
   console.log(`Querying for album: ${id}`);
@@ -199,7 +180,7 @@ async function deleteAlbum(id) {
 
 async function getArtists() {
   try {
-    const { rows } = await pool.query("SELECT  DISTINCT artists FROM music");
+    const { rows } = await pool.query("SELECT  DISTINCT name FROM artists");
     return rows;
   } catch (error) {
     console.error("Error getting all artists:", error);
