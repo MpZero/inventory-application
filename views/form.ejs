@@ -13,7 +13,18 @@
       </div>
       <form class="form" action="/albums/new" method="post">
         <label for="artist">Artist's name</label>
+
+        <% if (artistName) {%>
+        <input
+          type="text"
+          name="artist"
+          id="artist"
+          value="<%=artistName%>"
+          required
+        />
+        <%} else {%>
         <input type="text" name="artist" id="artist" required />
+        <%}%>
         <label for="album">Album's name</label>
         <input type="text" name="album" id="album" required />
         <label for="genre">Genre</label>

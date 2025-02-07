@@ -12,23 +12,22 @@ async function getAllArtists(req, res) {
 }
 
 async function getArtist(req, res) {
-  // console.log("Request parameters:", req.params);
-
-  const artist = req.params.id;
-  // console.log("Artist from controller:", artist);
+  const reqArtistId = req.params.id;
 
   try {
-    const artistData = await db.getArtist(artist);
-    // console.log("Query result:", artistData);
+    const artistData = await db.getArtist(reqArtistId);
+    console.log("Query result:", artistData);
 
-    if (artistData.length === 0) {
-      return res.status(404).send("artist not found");
-    }
+    const hasAlbums = Array.isArray(artistData) && artistData.length > 0;
+    const artistName = hasAlbums ? artistData[0].name : artistData.artistName;
+    const artistId = hasAlbums ? artistData[0].id : artistData.artistId;
 
     res.render("artistsid", {
-      title: artistData[0].name,
+      title: artistName,
       artist: artistData,
-      name: artistData[0].name,
+      name: artistName,
+      hasAlbums,
+      artistId,
       regExpFunction,
     });
   } catch (error) {

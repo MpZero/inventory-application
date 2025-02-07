@@ -201,6 +201,19 @@ async function getArtist(id) {
     `;
     const { rows } = await pool.query(query, [id]);
 
+    if (rows.length == 0) {
+      const data = await pool.query(
+        `SELECT artists.name AS name, artists.id AS id FROM artists
+        WHERE artists.id = $1;`,
+        [id]
+      );
+      // console.log(data);
+      const artistId = data.rows[0].id;
+      const artistName = data.rows[0].name;
+
+      return { rows, artistId, artistName };
+    }
+
     console.log(`Query result:`, rows);
     return rows;
   } catch (error) {

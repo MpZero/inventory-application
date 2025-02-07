@@ -51,7 +51,14 @@
           </p>
         </div>
         <div class="albums-wrapper">
-          <% artist.map(artist => { %>
+          <% if (!hasAlbums) { %>
+          <p>This artist has no albums</p>
+          <div class="no-albums-wrapper">
+            <a href="/albums/new?artistId=<%= artistId %>"
+              >Click here to add one</a
+            >
+          </div>
+          <%} else {%> <% artist.map(artist => { %>
           <div class="artist-wrapper">
             <a class="artist-link" href="albums/<%= artist.album_id %>">
               <img
@@ -66,7 +73,7 @@
               </div>
             </a>
           </div>
-          <% }); %>
+          <% }); %> <%}%>
         </div>
         <div class="back-link-wrapper">
           <a class="back-link" href="/albums">Take me back</a>

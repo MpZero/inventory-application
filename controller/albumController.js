@@ -1,10 +1,10 @@
 const db = require("../db/queries");
+const { getArtist } = require("./artistController");
 const { regExpFunction } = require("./regExp");
+
 async function getAllAlbums(req, res) {
   try {
     const albums = await db.getAllAlbums(req.query.sort, req.query.direction);
-    // console.log(`controller`, albums);
-
     res.render("albums", {
       title: "Albums",
       albums,
@@ -17,9 +17,8 @@ async function getAllAlbums(req, res) {
 }
 
 async function getAlbum(req, res) {
-  // console.log("Route parameters:", req.params);
   const albumId = req.params.id;
-  // console.log("Album from route:", albumId);
+  // console.log("AlbumId from controller:", albumId);
   try {
     const albumData = await db.getAlbum(albumId);
     // console.log("controller result:", albumData);
@@ -37,8 +36,17 @@ async function getAlbum(req, res) {
   }
 }
 
-function createAlbumGet(req, res) {
-  res.render("albumpost", { title: "Create Album" });
+async function createAlbumGet(req, res) {
+  const id = req.query.artistId;
+  if (!req.query) {
+    res.render("albumpost", { title: "Create Album" });
+  } else {
+    const data = await db.getArtist(id);
+    res.render("albumpost", {
+      title: "Create Album",
+      artistName: data.artistName,
+    });
+  }
 }
 
 async function createAlbumPost(req, res) {
