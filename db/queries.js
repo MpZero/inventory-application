@@ -222,10 +222,9 @@ async function getArtist(id) {
   }
 }
 async function insertArtist(artist) {
-  const { row } = await pool.query(
-    `INSERT INTO music(artists, albums, genres, date) VALUES ($1, NULL, NULL, NULL)`,
-    [artist]
-  );
+  const { row } = await pool.query(`INSERT INTO artists(name) VALUES ($1)`, [
+    artist,
+  ]);
   return row;
 }
 
@@ -235,9 +234,7 @@ async function insertArtist(artist) {
 
 async function getGenres() {
   try {
-    const { rows } = await pool.query(
-      "SELECT DISTINCT genres FROM music ORDER BY genres ASC"
-    );
+    const { rows } = await pool.query("SELECT DISTINCT id, name FROM genres");
     return rows;
   } catch (error) {
     console.error("Error getting all genres:", error);

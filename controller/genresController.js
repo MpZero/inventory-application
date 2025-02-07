@@ -4,15 +4,27 @@ async function getAllGenres(req, res) {
   try {
     const genres = await db.getGenres();
     // console.log("Genres: ", genres);
-    let newString = "";
-    genres.map((genre) => {
-      const word = genre.genres;
-      // const newString = genre.slice(0, 1);
-      newString = word.slice(0, 1).toUpperCase() + word.slice(1);
-      return newString;
-    });
+    // let newString = "";
+    // const mapped = Array.from(genres).map((genre) => {
+    //   const word = genre.name;
+    //   // const newString = genre.slice(0, 1);
+    //   newString = word.slice(0, 1).toUpperCase() + word.slice(1);
+    //   console.log("newstring:", newString);
+    //   const test = Array.from({ newString });
 
-    res.render("genres", { title: "Genres", genres, regExpFunction });
+    //   console.log(`test`, test);
+    // return genres;
+    //   return newString;
+    // });
+    // const arr = Array.from(mapped).map(([name, value]) => ({ name, value }));
+
+    // console.log(arr);
+
+    res.render("genres", {
+      title: "Genres",
+      genres: genres,
+      regExpFunction,
+    });
   } catch (error) {
     console.error("Error fetching genres: ", error);
     res.status(500).send("Error fetching genres");

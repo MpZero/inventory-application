@@ -20,7 +20,7 @@
         <h1 class="genres-h1">Genres</h1>
         <ol>
           <% genres.map((genre) => {%>
-          <li><a href="genres/<%= genre.genres%>"> <%= genre.genres%> </a></li>
+          <li><a href="genres/<%= genre.id%>"> <%= genre.name%> </a></li>
           <%})%>
         </ol>
       </div>
