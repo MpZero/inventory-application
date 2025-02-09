@@ -34,7 +34,7 @@ async function getAllAlbums(sort, direction) {
 }
 
 async function getAlbum(id) {
-  console.log(`Querying for album: ${id}`);
+  // console.log(`Querying for album: ${id}`);
 
   try {
     const query = `
@@ -44,7 +44,8 @@ async function getAlbum(id) {
         albums.title AS title, 
         artists.name AS artist, 
         genres.name AS genre, 
-        albums.release_date AS date 
+        albums.release_date AS date,
+        albums.genre_id AS genre_id
       FROM albums 
       JOIN artists ON albums.artist_id = artists.id
       JOIN genres ON albums.genre_id = genres.id  
@@ -52,7 +53,7 @@ async function getAlbum(id) {
     `;
 
     const { rows } = await pool.query(query, [id]);
-    console.log(`Query result:`, rows);
+    // console.log(`Query result:`, rows);
 
     return rows.length > 0 ? rows : null;
   } catch (error) {
@@ -246,9 +247,11 @@ async function getGenre(genre) {
   // console.log(`Querying for genre: ${genre}`);
   try {
     const query = `
-      SELECT id, artists, albums, genres,  date 
-      FROM music 
-      WHERE LOWER(REPLACE(genres, ' ', '')) = $1 ORDER BY albums ASC;
+      SELECT genres.id AS genres_id, genres.name AS name, albums.id AS albums_id, albums.title AS title, albums.release_date AS date, artists.id AS artist_id, artists.name AS artist_name 
+      FROM genres
+      JOIN albums ON genres.id = albums.genre_id
+      JOIN artists ON artists.id = albums.artist_id
+      WHERE genres.id = $1 
     `;
     const { rows } = await pool.query(query, [genre]);
     // console.log(`Query result:`, rows);

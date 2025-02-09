@@ -38,10 +38,7 @@
           <p><%= new Date(album.date).toLocaleDateString()%></p>
 
           <p>Genre</p>
-          <a
-            href="genres/<%= regExpFunction(album.genre)%>"
-            class="genres-link"
-          >
+          <a href="genres/<%= album.genre_id%>" class="genres-link">
             <p><%= album.genre %></p>
           </a>
           <p>Score</p>

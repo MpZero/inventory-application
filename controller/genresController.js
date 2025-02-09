@@ -3,23 +3,6 @@ const { regExpFunction } = require("./regExp");
 async function getAllGenres(req, res) {
   try {
     const genres = await db.getGenres();
-    // console.log("Genres: ", genres);
-    // let newString = "";
-    // const mapped = Array.from(genres).map((genre) => {
-    //   const word = genre.name;
-    //   // const newString = genre.slice(0, 1);
-    //   newString = word.slice(0, 1).toUpperCase() + word.slice(1);
-    //   console.log("newstring:", newString);
-    //   const test = Array.from({ newString });
-
-    //   console.log(`test`, test);
-    // return genres;
-    //   return newString;
-    // });
-    // const arr = Array.from(mapped).map(([name, value]) => ({ name, value }));
-
-    // console.log(arr);
-
     res.render("genres", {
       title: "Genres",
       genres: genres,
@@ -45,12 +28,10 @@ async function getGenre(req, res) {
       return res.status(404).send("genre not found");
     }
 
-    // console.log(`genres data bro`, genreData);
-
     res.render("genresid", {
-      title: genreData[0].genres,
+      title: genreData[0].name,
       genre: genreData,
-      name: genreData[0].genres,
+      name: genreData[0].name,
       regExpFunction,
     });
   } catch (error) {

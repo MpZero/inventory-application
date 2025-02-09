@@ -33,7 +33,7 @@
         <div class="albums-wrapper">
           <% genre.map(genre => { %>
           <div class="album-wrapper">
-            <a href="/albums/<%= regExpFunction(genre.albums)%>">
+            <a href="/albums/<%= genre.albums_id%>">
               <img
                 class="album-img"
                 src="https://placehold.co/150x150"
@@ -42,11 +42,11 @@
               />
             </a>
             <div class="album-info-wrapper">
-              <a href="/albums/<%= regExpFunction(genre.albums)%>"
-                ><%= genre.albums %></a
+              <a href="/albums/<%= regExpFunction(genre.title)%>"
+                ><%= genre.title %></a
               >
-              <a href="/artists/<%= regExpFunction(genre.artists)%>"
-                ><%= genre.artists %></a
+              <a href="/artists/<%= regExpFunction(genre.artist_name)%>"
+                ><%= genre.artist_name %></a
               >
               <p>Release: <%= new Date(genre.date).toLocaleDateString()%></p>
             </div>

@@ -68,7 +68,7 @@ async function createAlbumPost(req, res) {
 
 async function getAlbumUpdate(req, res) {
   const album = await db.getAlbum(req.params.id);
-  console.log(`get album update: album`, album);
+  // console.log(`get album update: album`, album);
 
   res.render("albumUpdate", {
     title: "Update Album",
