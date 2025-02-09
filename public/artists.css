@@ -26,6 +26,10 @@ li {
   transition: background-color 0.3s ease;
   transition: transform 0.3s ease-in-out;
 
+  -webkit-box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
+
   /* margin-bottom: 1rem; */
 }
 
@@ -66,8 +70,19 @@ li a:active {
   color: white;
   background-color: #f99400;
   border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
   will-change: transform;
+
+  -webkit-box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
+}
+
+.artists-post-btn:hover {
+  color: #f99400;
+  background-color: white;
+  transform: translateY(-4px);
 }
 
 @media (min-width: 599px) {

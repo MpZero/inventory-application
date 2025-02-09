@@ -29,6 +29,10 @@ li {
   text-decoration: none;
   transition: background-color 0.3s ease;
   transition: transform 0.3s ease-in-out;
+
+  -webkit-box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
 }
 
 li a {
