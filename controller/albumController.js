@@ -38,13 +38,29 @@ async function getAlbum(req, res) {
 
 async function createAlbumGet(req, res) {
   const id = req.query.artistId;
-  if (!req.query) {
-    res.render("albumpost", { title: "Create Album" });
-  } else {
+  const genreId = req.query.genreId;
+  if (id) {
     const data = await db.getArtist(id);
+    console.log(`createalbummget`, data);
+
     res.render("albumpost", {
       title: "Create Album",
       artistName: data.artistName,
+      genreName: null,
+    });
+  } else if (genreId) {
+    const data = await db.getGenre(genreId);
+
+    res.render("albumpost", {
+      title: "Create Album",
+      genreName: data.genreName,
+      artistName: null,
+    });
+  } else {
+    res.render("albumpost", {
+      title: "Create Album",
+      artistName: null,
+      genreName: null,
     });
   }
 }

@@ -16,11 +16,12 @@
 
         <% if (artistName) {%>
         <input
+          class="read-only"
           type="text"
           name="artist"
           id="artist"
-          value="<%=artistName%>"
-          required
+          value="<%= artistName%>"
+          readonly
         />
         <%} else {%>
         <input type="text" name="artist" id="artist" required />
@@ -28,7 +29,19 @@
         <label for="album">Album's name</label>
         <input type="text" name="album" id="album" required />
         <label for="genre">Genre</label>
+        <% if (genreName) {%>
+        <input
+          class="read-only"
+          type="text"
+          name="genre"
+          id="genre"
+          value="<%= genreName%>"
+          readonly
+        />
+        <%} else {%>
         <input type="text" name="genre" id="genre" required />
+        <%}%>
+
         <label for="date">Release Date</label>
         <input type="date" name="date" id="date" required />
         <button class="submit-btn" type="submit">Submit</button>

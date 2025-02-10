@@ -211,11 +211,13 @@ async function getArtist(id) {
       // console.log(data);
       const artistId = data.rows[0].id;
       const artistName = data.rows[0].name;
+      // console.log(data);
+      console.log(artistId);
 
       return { rows, artistId, artistName };
     }
 
-    console.log(`Query result:`, rows);
+    // console.log(`Query result:`, rows);
     return rows;
   } catch (error) {
     console.error("Error getting artist:", error);
@@ -243,8 +245,8 @@ async function getGenres() {
   }
 }
 
-async function getGenre(genre) {
-  // console.log(`Querying for genre: ${genre}`);
+async function getGenre(id) {
+  console.log(`Querying for genre:`, id);
   try {
     const query = `
       SELECT genres.id AS genres_id, genres.name AS name, albums.id AS albums_id, albums.title AS title, albums.release_date AS date, artists.id AS artist_id, artists.name AS artist_name 
@@ -253,7 +255,20 @@ async function getGenre(genre) {
       JOIN artists ON artists.id = albums.artist_id
       WHERE genres.id = $1 
     `;
-    const { rows } = await pool.query(query, [genre]);
+    const { rows } = await pool.query(query, [id]);
+
+    if (rows.length == 0) {
+      const data = await pool.query(
+        `SELECT genres.name AS name, genres.id AS id FROM genres
+        WHERE genres.id = $1;`,
+        [id]
+      );
+      console.log(`row length 0`, data);
+      const genreId = data.rows[0].id;
+      const genreName = data.rows[0].name;
+
+      return { rows, genreId, genreName };
+    }
     // console.log(`Query result:`, rows);
     return rows;
   } catch (error) {

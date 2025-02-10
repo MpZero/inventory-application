@@ -31,7 +31,14 @@
           </p>
         </div>
         <div class="albums-wrapper">
-          <% genre.map(genre => { %>
+          <% if (!hasAlbums) { %>
+          <div class="no-albums-wrapper">
+            <p>This genre has no albums !</p>
+            <a class="add-album-btn" href="/albums/new?genreId=<%= id%>">
+              Click here to add one
+            </a>
+          </div>
+          <%} else {%> <% genre.map(genre => { %>
           <div class="album-wrapper">
             <a href="/albums/<%= genre.albums_id%>">
               <img
@@ -51,8 +58,9 @@
               <p>Release: <%= new Date(genre.date).toLocaleDateString()%></p>
             </div>
           </div>
-          <% }); %>
+          <% }); %> <%}%>
         </div>
+
         <div class="back-link-wrapper">
           <a class="back-link" href="/genres">Take me back</a>
         </div>

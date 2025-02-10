@@ -22,16 +22,29 @@ async function getGenre(req, res) {
 
   try {
     const genreData = await db.getGenre(genre);
-    // console.log("Query result:", genreData);
+    console.log("Query result on controller:", genreData);
+    // console.log("Query result on controller:", genreData[0].name);
 
-    if (genreData.length === 0) {
-      return res.status(404).send("genre not found");
-    }
+    // if (genreData.length === 0) {
+    //   return res.status(404).send("genre not found");
+    // }
+
+    const hasAlbums = Array.isArray(genreData) && genreData.length > 0;
+    const genreName = hasAlbums ? genreData[0].name : genreData.genreName;
+
+    const genreId = hasAlbums ? genreData[0].genres_id : genreData.genreId;
+
+    console.log("genrename:", genreName);
+    console.log("genreId:", genreId);
+
+    // const artistId = hasAlbums ? genreData[0].id : genreData.artistId;
 
     res.render("genresid", {
-      title: genreData[0].name,
+      hasAlbums,
+      title: genreName,
       genre: genreData,
-      name: genreData[0].name,
+      name: genreName,
+      id: genreId,
       regExpFunction,
     });
   } catch (error) {
