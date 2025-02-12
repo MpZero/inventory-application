@@ -1,10 +1,3 @@
-@font-face {
-  font-family: "m6x11";
-  src: url("./fonts/m6x11.ttf") format("truetype");
-  font-family: "Roboto";
-  src: url("https://fonts.googleapis.com/css2?family=Kanit&family=Oswald:wght@200..700&family=Poppins&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik&display=swap")
-    format("truetype");
-}
 :root {
   --radius: 8px;
 }
@@ -120,11 +113,21 @@
   font-size: 1.1rem;
 }
 
+.links,
+.link1 {
+  will-change: transform;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.link1:hover,
 .links:hover {
+  transform: translateY(-4px);
   background-color: #e00e0e;
 }
 
-.links:hover > p {
+.links > p {
+  will-change: transform;
   background-color: #51251d;
 }
 
@@ -141,7 +144,7 @@
   color: #ffffff;
   padding: 0.3rem 0.4rem;
   font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  /* transition: background-color 0.3s ease; */
 }
 
 .links {
@@ -157,6 +160,10 @@
   padding: 0.1rem;
   border-radius: 8px;
   background-color: #551f20;
+}
+
+.links:hover > a {
+  will-change: transform;
 }
 
 .link1 {

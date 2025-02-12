@@ -8,14 +8,10 @@
     <link rel="stylesheet" href="header.css" />
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="footer.css" />
-    <!-- <link rel="stylesheet" href="homepage.css" /> -->
     <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kanit&family=Oswald:wght@200..700&family=Poppins&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <!-- fonts -->
     <title><%= title%></title>
   </head>
@@ -23,34 +19,58 @@
     <%- include("./navbar")%>
     <div>
       <%- include("./header")%>
-
-      <!-- <header>
-        <div class="search-wrapper">
-          <input type="search" name="" id="" />
-          <button type="submit">Search</button>
-        </div>
-      </header> -->
       <main>
         <h1>Latest Albums</h1>
-        <div class="latest-wrapper">
-          <div class="latest-album-wrapper"></div>
-          <div class="latest-album-wrapper"></div>
-          <div class="latest-album-wrapper"></div>
-        </div>
-        <h2>TOP 3</h2>
-        <div class="top3-wrapper">
-          <div class="top3-album-wrapper"></div>
-          <div class="top3-album-wrapper"></div>
-          <div class="top3-album-wrapper"></div>
-        </div>
-      </main>
-      <!-- <footer>
+        <p class="lorem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero tempora iusto ea debitis quidem.</p>
+        <div class="albums-main">
+            <% albums.map(album => { %>
+            <div class="album-wrapper">
+              <a class="album-link" href="albums/<%= album.id %>">
+                <img
+                  class="album-img"
+                  src="https://placehold.co/150x150"
+                  alt=""
+                  srcset=""
+                />
+                <div class="album-info-wrapper">
+                  <p><%= album.title %></p>
+                  <a href="/artists/<%= album.artist_id%>"><%= album.artist %></a>
+                  <p>Release: <%= new Date(album.date).toLocaleDateString()%></p>
+                </div>
+              </a>
+            </div>
+            <% }); %>
+          </div>
+          <h2>Random Picks!</h2>
+          <p class="lorem">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repellendus deserunt.</p>
+          <div class="top3-wrapper">
+            <% randomAlbums.map(album => { %>
+              <div class="album-wrapper">
+                <a class="album-link" href="albums/<%= album.id %>">
+                  <img
+                  class="album-img"
+                  src="https://placehold.co/150x150"
+                  alt=""
+                  srcset=""
+                  />
+                  <div class="album-info-wrapper">
+                    <p><%= album.title %></p>
+                    <a href="/artists/<%= album.artist_id%>"><%= album.name %></a>
+                    <p>Release: <%= new Date(album.release_date).toLocaleDateString()%></p>
+                  </div>
+                </a>
+              </div>
+              <% }); %>
+            </div>
+            <%- include("./footer") %>
+          </div>
+          </main>
+          <!-- <footer>
         Made by
         <a href="http://">user</a>
         On:
         <a href="">user page</a>
       </footer> -->
-      <%- include("./footer") %>
     </div>
   </body>
 </html>

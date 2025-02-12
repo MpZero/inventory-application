@@ -8,6 +8,7 @@ const {
   getAlbumUpdate,
   postAlbumUpdate,
   deleteAlbum,
+  getLatestAlbums,
 } = require("../controller/albumController");
 const {
   getAllArtists,
@@ -18,9 +19,7 @@ const {
 const { getAllGenres, getGenre } = require("../controller/genresController");
 
 //homepage
-router.get("/", (req, res) =>
-  res.render("index.ejs", { title: "GG Music Database" })
-);
+router.get("/", getLatestAlbums);
 
 //about
 router.get("/about", (req, res) =>

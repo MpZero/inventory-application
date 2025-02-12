@@ -176,6 +176,33 @@ async function deleteAlbum(id) {
     throw new Error("Failed to delete album");
   }
 }
+
+async function getLatestAlbums() {
+  try {
+    const { rows } = await pool.query(
+      "SELECT albums.id AS id, albums.artist_id AS artist_id,albums.title AS title, artists.name AS artist, genres.name AS genre, albums.release_date AS date,albums.genre_id AS genre_id FROM albums JOIN artists ON albums.artist_id = artists.id JOIN genres ON albums.genre_id = genres.id ORDER BY date DESC LIMIT 6"
+    );
+    return rows;
+  } catch (error) {
+    console.error("Error getting latest albums:", error);
+    throw new Error("Failed to get latest albums");
+  }
+}
+
+async function getRandomAlbums() {
+  try {
+    const { rows } = await pool.query(
+      `SELECT * FROM albums
+       JOIN artists
+       ON artists.id = albums.artist_id
+      ORDER BY RANDOM() LIMIT 4`
+    );
+    return rows;
+  } catch (error) {
+    console.error("Error getting random albums:", error);
+    throw new Error("Failed to get random albums");
+  }
+}
 ////////////////////////////////////////////
 ////////////////* ARTISTS */////////////////
 ////////////////////////////////////////////
@@ -280,6 +307,8 @@ async function getGenre(id) {
 module.exports = {
   getAllAlbums,
   getAlbum,
+  getLatestAlbums,
+  getRandomAlbums,
   insertAlbum,
   updateAlbum,
   deleteAlbum,
@@ -288,5 +317,4 @@ module.exports = {
   insertArtist,
   getGenres,
   getGenre,
-  // getDate,
 };

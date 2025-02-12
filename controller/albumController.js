@@ -93,6 +93,18 @@ async function getAlbumUpdate(req, res) {
   });
 }
 
+async function getLatestAlbums(req, res) {
+  const albums = await db.getLatestAlbums();
+  const randomAlbums = await db.getRandomAlbums();
+  console.log(albums);
+
+  res.render("index", {
+    title: "GG Music Database",
+    albums: albums,
+    randomAlbums: randomAlbums,
+  });
+}
+
 async function postAlbumUpdate(req, res) {
   try {
     console.log(`postAlbumUpdate req.body: `, req.body);
@@ -128,6 +140,7 @@ async function deleteAlbum(req, res) {
 module.exports = {
   getAllAlbums,
   getAlbum,
+  getLatestAlbums,
   createAlbumGet,
   createAlbumPost,
   getAlbumUpdate,
