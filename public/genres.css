@@ -2,10 +2,17 @@
   color: white;
   display: grid;
   color: white;
-  padding: 0.4rem;
+  padding: 1rem;
   /* align-items: center; */
   /* gap: 1rem; */
 }
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
 .genres-h1 {
   color: white;
 }
@@ -89,8 +96,8 @@ li a:active {
 }
 
 @media (min-width: 1024px) {
-  .artists-main-wrapper {
-    padding: 1rem;
+  .genres-main-wrapper {
+    margin-bottom: 4rem;
   }
 
   ol {

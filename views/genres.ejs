@@ -17,7 +17,14 @@
     <div>
       <%- include("./header"); %>
       <div class="genres-main-wrapper">
-        <h1 class="genres-h1">Genres</h1>
+        <div class="text-wrapper">
+          <h1 class="genres-h1">Genres</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid,
+            ducimus ad quos odit perferendis dolorum optio nulla eos numquam
+            distinctio a aliquam facilis expedita
+          </p>
+        </div>
         <ol>
           <% genres.map((genre) => {%>
           <li><a href="genres/<%= genre.id%>"> <%= genre.name%> </a></li>

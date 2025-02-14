@@ -8,6 +8,7 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 0.3rem;
+  font-size: clamp(0.4rem, 2.5vw, 0.8rem);
 }
 
 .name {
