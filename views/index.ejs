@@ -35,7 +35,7 @@
                 <div class="album-info-wrapper">
                   <p><%= album.title %></p>
                   <a href="/artists/<%= album.artist_id%>"><%= album.artist %></a>
-                  <p>Release: <%= new Date(album.date).toLocaleDateString()%></p>
+                  <p class="release-p">Release: <%= new Date(album.date).toLocaleDateString()%></p>
                 </div>
               </a>
             </div>

@@ -55,6 +55,8 @@ main {
   flex-direction: column;
   transition: transform 0.3s ease-in-out;
   will-change: transform;
+
+  box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
 }
 
 .p-wrapper {
@@ -180,7 +182,6 @@ main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.6rem;
-    padding: 0.4rem;
   }
   .artist-h1 {
     grid-column: 1/3;

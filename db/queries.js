@@ -6,7 +6,7 @@ const pool = require("./pool");
 
 async function getAllAlbums(sort, direction) {
   const query = `
-        SELECT albums.id AS id, albums.title AS title, artists.name AS artist, genres.name AS genre, albums.release_date AS date
+        SELECT albums.id AS id, albums.title AS title, artists.name AS artist, artists.id AS artist_id, genres.name AS genre, albums.release_date AS date
         FROM albums
         JOIN artists ON albums.artist_id = artists.id
         JOIN genres ON albums.genre_id = genres.id;

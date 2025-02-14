@@ -18,30 +18,26 @@ main > h2 {
   text-align: left;
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.6rem;
 }
 
 /* /////////////////// */
 .album-wrapper {
   background-color: white;
-  font-family: "Poppins", serif;
-  /* font-size: 0.4rem; */
-  /* max-width: 150px; */
-  /* max-height: 300px; */
   padding: 0.2rem;
   border-radius: 8px;
   text-align: center;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  align-content: center;
   font-size: clamp(1.5rem, 2.5vw, 0.8rem);
-
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
   -webkit-box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 3px 2px 11px 0px rgba(0, 0, 0, 0.75);
-  transition: transform 0.3s ease-in-out;
-  will-change: transform;
 }
 
 .album-wrapper:hover {
@@ -52,6 +48,9 @@ main > h2 {
   color: #5cabeb;
   font-weight: bold;
   transition: color 0.3s ease-in-out;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .album-link:hover p:nth-child(1) {
@@ -61,20 +60,22 @@ main > h2 {
 
 .album-img {
   border-radius: 8px;
+  width: 100%;
 }
 
 .album-info-wrapper {
   color: black;
   padding: 0.5rem;
   font-size: 0.6rem;
-  font-family: "Poppins", "Rubik";
+  font-size: clamp(0.6rem, 2.5vw, 0.8rem);
 }
 
-.album-info-wrapper > a:nth-child(1) {
-  margin-block: 0.2rem;
-  overflow: hidden;
-  white-space: nowrap;
+.album-info-wrapper > a {
+  text-align: center;
+  margin: 2px 0;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .album-info-wrapper > a {
   text-decoration: none;
@@ -84,18 +85,19 @@ main > h2 {
   text-decoration: underline;
   color: #4f94d5;
 }
-.album-info-wrapper p:nth-child(1) {
-  color: #5cabeb;
-  font-weight: bold;
-  transition: color 0.3s ease-in-out;
-}
-.album-info-wrapper p {
+
+/* .album-info-wrapper > a {
   color: black;
   text-align: center;
   margin: 2px 0;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+} */
+
+.release-p {
+  text-overflow: clip;
+  white-space: nowrap;
 }
 /* /////////////////// */
 
@@ -106,7 +108,7 @@ main > h2 {
 
 .top3-wrapper {
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.4rem;
   justify-content: center;
   margin-bottom: 1rem;
@@ -116,27 +118,28 @@ main > h2 {
 @media (min-width: 470px) {
   .albums-main,
   .top3-wrapper {
-    gap: 1rem;
+    gap: 0.4rem;
   }
 }
 
 @media (min-width: 470px) {
   .albums-main,
   .top3-wrapper {
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 800px) {
   .albums-main,
   .top3-wrapper {
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (min-width: 1200px) {
   .albums-main,
   .top3-wrapper {
-    grid-template-columns: repeat(6, auto);
+    grid-template-columns: repeat(6, 1fr);
+    padding: 1rem;
   }
 }

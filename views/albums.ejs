@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="index.css" />
+    <!-- <link rel="stylesheet" href="index.css" /> -->
     <link rel="stylesheet" href="layout.css" />
     <link rel="stylesheet" href="albums.css" />
     <link rel="stylesheet" href="header.css" />
@@ -19,22 +19,26 @@
 
       <main class="albums-main">
         <h1 class="albums-h1">All Albums</h1>
-        <% albums.map(album => { %>
-        <div class="album-wrapper">
-          <a class="albums-link" href="albums/<%= album.id %>">
-            <img
-              class="album-img"
-              src="https://placehold.co/150x150"
-              alt=""
-              srcset=""
-            />
-            <p><%= album.title %></p>
-            <p><%= album.artist %></p>
-            <p>Release: <%= new Date(album.date).toLocaleDateString()%></p>
-          </a>
-        </div>
-        <% }); %>
 
+        <div class="albums-wrapper">
+          <% albums.map(album => { %>
+          <div class="album-wrapper">
+            <a href="/albums/<%= album.id%>">
+              <img
+                class="album-img"
+                src="https://placehold.co/150x150"
+                alt=""
+                srcset=""
+              />
+            </a>
+            <div class="album-info-wrapper">
+              <a href="/albums/<%= album.id%>"><%= album.title %></a>
+              <a href="/artists/<%= album.artist_id%>"><%= album.artist %></a>
+              <p>Release: <%= new Date(album.date).toLocaleDateString()%></p>
+            </div>
+          </div>
+          <% }); %>
+        </div>
         <a class="post-album-btn" href="/albums/new">Add new Album</a>
       </main>
       <%- include("./footer"); %>
