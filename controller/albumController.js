@@ -1,6 +1,45 @@
 const db = require("../db/queries");
 const { getArtist } = require("./artistController");
 const { regExpFunction } = require("./regExp");
+const { body, validationResult } = require("express-validator");
+
+const validateAndSanitizeAlbumUpdate = [
+  body("albums")
+    .notEmpty()
+    .withMessage("Album title is required")
+    .trim()
+    .escape(),
+  body("artist")
+    .notEmpty()
+    .withMessage("Artist name is required")
+    .trim()
+    .escape(),
+  body("genre")
+    .isString()
+    .withMessage("Genre must be a string")
+    .trim()
+    .escape(),
+  body("date").isISO8601().withMessage("Invalid date format").toDate(),
+];
+
+const validateAndSanitizeAlbumPost = [
+  body("album")
+    .notEmpty()
+    .withMessage("Album title is required")
+    .trim()
+    .escape(),
+  body("artist")
+    .notEmpty()
+    .withMessage("Artist name is required")
+    .trim()
+    .escape(),
+  body("genre")
+    .isString()
+    .withMessage("Genre must be a string")
+    .trim()
+    .escape(),
+  body("date").isISO8601().withMessage("Invalid date format").toDate(),
+];
 
 async function getAllAlbums(req, res) {
   try {
@@ -18,10 +57,8 @@ async function getAllAlbums(req, res) {
 
 async function getAlbum(req, res) {
   const albumId = req.params.id;
-  // console.log("AlbumId from controller:", albumId);
   try {
     const albumData = await db.getAlbum(albumId);
-    // console.log("controller result:", albumData);
     if (albumData.length === 0) {
       return res.status(404).send("Album not found");
     }
@@ -69,10 +106,9 @@ async function createAlbumPost(req, res) {
   const { artist, album, genre, date } = req.body;
 
   try {
-    if (!album) {
-      return res.status(400).send("Album name is required");
-    } else if (!artist) {
-      return res.status(400).send("Artist name is required");
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
     await db.insertAlbum(artist, album, genre, date);
     res.redirect("/albums");
@@ -107,6 +143,12 @@ async function getLatestAlbums(req, res) {
 
 async function postAlbumUpdate(req, res) {
   try {
+    // Validate request
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     console.log(`postAlbumUpdate req.body: `, req.body);
 
     const { id, albums, artist, genre, date } = req.body;
@@ -144,6 +186,8 @@ module.exports = {
   createAlbumGet,
   createAlbumPost,
   getAlbumUpdate,
+  validateAndSanitizeAlbumUpdate,
+  validateAndSanitizeAlbumPost,
   postAlbumUpdate,
   deleteAlbum,
 };

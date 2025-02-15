@@ -1,5 +1,14 @@
 const db = require("../db/queries");
 const { regExpFunction } = require("./regExp");
+const { body, validationResult } = require("express-validator");
+
+const validateAndSanitizeArtistPost = [
+  body("artist")
+    .notEmpty()
+    .withMessage("Artist name is required")
+    .trim()
+    .escape(),
+];
 async function getAllArtists(req, res) {
   try {
     const artists = await db.getArtists();
@@ -44,8 +53,9 @@ async function createArtistPost(req, res) {
   const artist = req.body.artist;
 
   try {
-    if (!artist) {
-      return res.status(400).send("Artist name is required");
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
     await db.insertArtist(artist);
     res.redirect("/artists");
@@ -60,4 +70,5 @@ module.exports = {
   getArtist,
   createArtistGet,
   createArtistPost,
+  validateAndSanitizeArtistPost,
 };

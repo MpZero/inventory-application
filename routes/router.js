@@ -9,12 +9,15 @@ const {
   postAlbumUpdate,
   deleteAlbum,
   getLatestAlbums,
+  validateAndSanitizeAlbumUpdate,
+  validateAndSanitizeAlbumPost,
 } = require("../controller/albumController");
 const {
   getAllArtists,
   getArtist,
   createArtistGet,
   createArtistPost,
+  validateAndSanitizeArtistPost,
 } = require("../controller/artistController");
 const { getAllGenres, getGenre } = require("../controller/genresController");
 
@@ -32,17 +35,21 @@ router.get("/contact", (req, res) => res.render("contact.ejs"));
 //////////// albums ////////////
 router.get("/albums", getAllAlbums);
 router.get("/albums/new", createAlbumGet);
-router.post("/albums/new", createAlbumPost);
+router.post("/albums/new", validateAndSanitizeAlbumPost, createAlbumPost);
 router.get("/albums/:id", getAlbum);
 router.get("/albums/:id/update", getAlbumUpdate);
-router.post("/albums/:id/update", postAlbumUpdate);
+router.post(
+  "/albums/:id/update",
+  validateAndSanitizeAlbumUpdate,
+  postAlbumUpdate
+);
 router.post("/albums/:id/delete", deleteAlbum);
 ////////////////////////////////
 
 //////////// artists ////////////
 router.get("/artists", getAllArtists);
 router.get("/artists/new", createArtistGet);
-router.post("/artists/new", createArtistPost);
+router.post("/artists/new", validateAndSanitizeArtistPost, createArtistPost);
 router.get("/artists/:id", getArtist);
 /////////////////////////////////
 
