@@ -78,7 +78,6 @@ async function createAlbumGet(req, res) {
   const genreId = req.query.genreId;
   if (id) {
     const data = await db.getArtist(id);
-    console.log(`createalbummget`, data);
 
     res.render("albumpost", {
       title: "Create Album",
@@ -132,7 +131,6 @@ async function getAlbumUpdate(req, res) {
 async function getLatestAlbums(req, res) {
   const albums = await db.getLatestAlbums();
   const randomAlbums = await db.getRandomAlbums();
-  console.log(albums);
 
   res.render("index", {
     title: "GG Music Database",
@@ -143,19 +141,18 @@ async function getLatestAlbums(req, res) {
 
 async function postAlbumUpdate(req, res) {
   try {
-    // Validate request
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    console.log(`postAlbumUpdate req.body: `, req.body);
+    // console.log(`postAlbumUpdate req.body: `, req.body);
 
     const { id, albums, artist, genre, date } = req.body;
 
-    console.log(
-      `Updating album with ID: ${id}, Title: ${albums}, Artist: ${artist}, Genre: ${genre}, Date: ${date}`
-    );
+    // console.log(
+    //   `Updating album with ID: ${id}, Title: ${albums}, Artist: ${artist}, Genre: ${genre}, Date: ${date}`
+    // );
 
     await db.updateAlbum(artist, albums, genre, date, id);
 
@@ -169,8 +166,6 @@ async function postAlbumUpdate(req, res) {
 async function deleteAlbum(req, res) {
   try {
     const albumId = req.params.id;
-    console.log(`albumid from deleteAlbum controller`);
-
     await db.deleteAlbum(albumId);
     res.redirect("/albums");
   } catch (error) {

@@ -169,11 +169,42 @@ async function updateAlbum(artist, album, genre, date, id) {
 }
 
 async function deleteAlbum(id) {
+  const client = await pool.connect();
+
   try {
-    await pool.query("DELETE FROM albums WHERE id = $1", [id]);
+    await client.query("BEGIN");
+
+    const albumResult = await client.query(
+      "SELECT genre_id FROM albums WHERE id = $1",
+      [id]
+    );
+
+    if (albumResult.rows.length === 0) {
+      throw new Error("Album not found");
+    }
+
+    const genreId = albumResult.rows[0].genre_id;
+
+    const countResult = await client.query(
+      "SELECT COUNT(*) FROM albums WHERE genre_id = $1",
+      [genreId]
+    );
+
+    const albumCount = parseInt(countResult.rows[0].count, 10);
+
+    await client.query("DELETE FROM albums WHERE id = $1", [id]);
+
+    if (albumCount === 1) {
+      await client.query("DELETE FROM genres WHERE id = $1", [genreId]);
+    }
+
+    await client.query("COMMIT");
   } catch (error) {
+    await client.query("ROLLBACK");
     console.error("Error deleting album:", error);
     throw new Error("Failed to delete album");
+  } finally {
+    client.release();
   }
 }
 
@@ -218,7 +249,6 @@ async function getArtists() {
 }
 
 async function getArtist(id) {
-  console.log(`Querying for artist: `, id);
   try {
     const query = `
      SELECT artists.id AS id, artists.name AS name, albums.title AS title, albums.id AS album_id, albums.release_date AS date 
@@ -235,16 +265,12 @@ async function getArtist(id) {
         WHERE artists.id = $1;`,
         [id]
       );
-      // console.log(data);
       const artistId = data.rows[0].id;
       const artistName = data.rows[0].name;
-      // console.log(data);
-      console.log(artistId);
 
       return { rows, artistId, artistName };
     }
 
-    // console.log(`Query result:`, rows);
     return rows;
   } catch (error) {
     console.error("Error getting artist:", error);
@@ -273,7 +299,6 @@ async function getGenres() {
 }
 
 async function getGenre(id) {
-  console.log(`Querying for genre:`, id);
   try {
     const query = `
       SELECT genres.id AS genres_id, genres.name AS name, albums.id AS albums_id, albums.title AS title, albums.release_date AS date, artists.id AS artist_id, artists.name AS artist_name 
@@ -290,13 +315,11 @@ async function getGenre(id) {
         WHERE genres.id = $1;`,
         [id]
       );
-      console.log(`row length 0`, data);
       const genreId = data.rows[0].id;
       const genreName = data.rows[0].name;
 
       return { rows, genreId, genreName };
     }
-    // console.log(`Query result:`, rows);
     return rows;
   } catch (error) {
     console.error("Error getting genre:", error);
