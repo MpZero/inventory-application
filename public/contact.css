@@ -9,3 +9,9 @@
 .contact-wrapper p {
   color: white;
 }
+
+.contact-wrapper h1,
+h2,
+h3 {
+  margin-block: 1rem;
+}

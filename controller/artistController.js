@@ -25,7 +25,6 @@ async function getArtist(req, res) {
 
   try {
     const artistData = await db.getArtist(reqArtistId);
-    console.log("Query result:", artistData);
 
     const hasAlbums = Array.isArray(artistData) && artistData.length > 0;
     const artistName = hasAlbums ? artistData[0].name : artistData.artistName;
@@ -49,7 +48,6 @@ async function createArtistGet(req, res) {
   res.render("artistspost");
 }
 async function createArtistPost(req, res) {
-  console.log(req.body);
   const artist = req.body.artist;
 
   try {
