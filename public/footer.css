@@ -9,6 +9,8 @@ footer {
   align-items: center;
   gap: 0.3rem;
   font-size: clamp(0.5rem, 2.5vw, 0.8rem);
+
+  white-space: nowrap;
 }
 
 .name {

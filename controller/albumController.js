@@ -76,12 +76,13 @@ async function getAlbum(req, res) {
 async function createAlbumGet(req, res) {
   const id = req.query.artistId;
   const genreId = req.query.genreId;
+
   if (id) {
     const data = await db.getArtist(id);
 
     res.render("albumpost", {
       title: "Create Album",
-      artistName: data.artistName,
+      artistName: data.artistName || data[0].name,
       genreName: null,
     });
   } else if (genreId) {

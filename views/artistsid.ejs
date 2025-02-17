@@ -73,13 +73,21 @@
               </div>
             </a>
           </div>
-          <% }); %> <%}%>
+          <% }); %> 
+          
+          <%}%>
         </div>
-        <div class="back-link-wrapper">
-          <a class="back-link" href="/albums">Take me back</a>
+        <a class="add-album-btn" href="/albums/new?artistId=<%= artistId %>"
+        
+          >Click here to add more <%= title %> albums</a
+          >
+          <div class="back-link-wrapper">
+            <a class="back-link" href="/albums">Take me back</a>
+          </div>
+        </main>
+        <%- include("./footer"); %>
         </div>
-      </main>
-      <%- include("./footer"); %>
+      
     </div>
   </body>
 </html>
